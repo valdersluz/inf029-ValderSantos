@@ -14,6 +14,8 @@
 #define EXCLUSAO_PROF_SUCESSO -8
 #define CAD_PROF_SUCESSO -9
 
+#define ERRO_CAD_SEXO -10
+
 typedef struct dma {
     int dia;
     int mes;
@@ -30,8 +32,10 @@ typedef struct alu{
 
 typedef struct prof{
     int matricula;
+    char nome[50];
     int sexo;
     int ativo;
+    Data dataNasc;
 } Professor;
 
 // protótipos das funções
@@ -98,6 +102,8 @@ int main(void){
                                 printf("Lista de alunos cheia\n");
                             }else if(retorno == MATRICULA_INVALIDA){
                                 printf("Matricula Invalida\n");
+                            }else if(retorno == ERRO_CAD_SEXO) {
+                                printf("Sexo invalido");
                             }else{
                                 printf("Cadastrado com Sucesso\n");
                                 qtdAluno++;
@@ -265,6 +271,40 @@ int main(void){
     return 0;
 }
 
+int validar_data(int dia, int mes, int ano){
+    if(ano % 4 == 0 && (ano % 400 || ano % 100 != 0)){
+        int bissexto = true;
+        //bissexto
+    }else{
+        bissexto = false;
+        //não é bissexto e data é inválida
+    }
+
+    if(mes < 1 || mes > 12){
+        // correto
+    }else{
+        //mes inválido e data é inválida
+    }
+
+    if(bissexto == false){
+        //
+    }else{
+        if(mes == 2){
+            if(dia < 1 || dia > 29){
+                //inválido
+            }else{
+                //válido
+            }
+        }else if{
+            //validar mês de 30
+        }else if{
+            //validar mês de 31
+        }
+    }
+
+
+}
+
 
 int menu_geral(){
         int opcao;
@@ -310,6 +350,28 @@ int cadastrar_aluno(Aluno listarAluno[], int qtdAluno){
             return MATRICULA_INVALIDA;
         }
 
+        printf("Digite nome: \n");
+        fgets(listarAluno[qtdAluno].nome, 50, stdin);
+        size_t ln = strlen(listarAluno[qtdAluno].nome) - 1;
+        if(listarAluno[qtdAluno].nome[ln] == '\n')
+            listarAluno[qtdAluno].nome[ln] = '\0';
+
+        printf("Digite o sexo: \n");
+        scanf("%c", &listarAluno[qtdAluno].sexo);
+        listarAluno[qtdAluno].sexo = toupper(listarAluno[qtdAluno].sexo);
+        if(listarAluno[qtdAluno].sexo != 'M' && listarAluno[qtdAluno].sexo != 'F'){
+            return ERRO_CAD_SEXO;
+        }
+
+        printf("Digite o dia de nascimento: \n");
+        scanf("%d", &listarAluno[qtdAluno].dataNasc.dia);
+
+        printf("Digite o mês de nascimento: \n");
+        scanf("%d", &listarAluno[qtdAluno].dataNasc.mes);
+
+        printf("Digite o ano de nascimento: \n");
+        scanf("%d", &listarAluno[qtdAluno].dataNasc.ano);
+
         listarAluno[qtdAluno].matricula = matricula;
         listarAluno[qtdAluno].ativo = 1;
 
@@ -327,7 +389,12 @@ void listar_aluno(Aluno listarAluno[], int qtdAluno){
     }else{
         for(int i = 0; i < qtdAluno; i++){
             if(listarAluno[i].ativo == 1)
+            printf("-------------\n");
             printf("Matricula: %d\n", listarAluno[i].matricula);
+            printf("Nome: %s\n", listarAluno[i].nome);
+            printf("Sexo: %c\n");
+            printf("Data Nascimento: %d/%d/%d\n", listarAluno[i].dataNasc.dia, listarAluno[i].dataNasc.mes, listarAluno[i].dataNasc.ano);
+            printf("CPF: %s\n", listarAluno[i].cpf);
         }
     }
 }
