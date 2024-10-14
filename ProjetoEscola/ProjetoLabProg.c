@@ -14,10 +14,18 @@
 #define EXCLUSAO_PROF_SUCESSO -8
 #define CAD_PROF_SUCESSO -9
 
+typedef struct dma {
+    int dia;
+    int mes;
+    int ano;
+} Data;
+
 typedef struct alu{
     int matricula;
+    char nome[50];
     char sexo;
     int ativo;
+    Data dataNasc;
 } Aluno;
 
 typedef struct prof{
