@@ -273,10 +273,57 @@ int main(void){
 
 int validar_data(int dia, int mes, int ano){
     if(ano % 4 == 0 && (ano % 400 || ano % 100 != 0)){
-        int bissexto = true;
         //bissexto
+        if(mes < 1 || mes > 12){
+        // correto
+
+            switch(mes){
+                case 1:{
+                    break;
+                }
+                case 2:{
+                    break;
+                }
+                case 3:{
+                    break;
+                }
+                case 4:{
+                    break;
+                }
+                case 5:{
+                    break;
+                }
+                case 6:{
+                    break;
+                }
+                case 7:{
+                    break;
+                }
+                case 8:{
+                    break;
+                }
+                case 9:{
+                    break;
+                }
+                case 10:{
+                    break;
+                }
+                case 11:{
+                    break;
+                }
+                case 12:{
+                    break;
+                }
+                default {
+                    break;
+                }
+            }
+
+        }else{
+        //mes inválido e data é inválida
+        }
     }else{
-        bissexto = false;
+
         //não é bissexto e data é inválida
     }
 
