@@ -15,6 +15,7 @@
 #define CAD_PROF_SUCESSO -9
 
 #define ERRO_CAD_SEXO -10
+#define ERRO_CAD_DATA -11
 
 typedef struct dma {
     int dia;
@@ -274,44 +275,104 @@ int main(void){
 int validar_data(int dia, int mes, int ano){
     if(ano % 4 == 0 && (ano % 400 || ano % 100 != 0)){
         //bissexto
-        if(mes < 1 || mes > 12){
+        if(mes >= 1 || mes <= 12){
         // correto
 
             switch(mes){
                 case 1:{
+                    if(dia >= 1 || dia <= 31){
+                       //janeiro
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 2:{
+                    if(dia >= 1 || dia <= 29 ){
+                        //fevereiro com dia 29
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 3:{
+                    if(dia >= 1 || dia <= 31){
+                        //março
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 4:{
+                    if(dia >= 1 || dia <= 30){
+                        //abril
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 5:{
+                    if(dia >= 1 || dia <= 31){
+                        //maio
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 6:{
+                    if(dia >= 1 || dia <= 30){
+                        //junho
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 7:{
+                    if(dia >= 1 || dia <= 31){
+                        //julho
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 8:{
+                    if(dia >= 1 || dia <= 31){
+                        //agosto
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 9:{
+                    if(dia >= 1 || dia <= 30){
+                        //setembro
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 10:{
+                    if(dia >= 1 || dia <= 31){
+                        //outubro
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 11:{
+                    if(dia >= 1 || dia <= 30){
+                        //novembro
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 case 12:{
+                    if(dia >= 1 || dia <= 31){
+                        //dezembro
+                    }else{
+                        //data inválida
+                    }
                     break;
                 }
                 default {
@@ -321,33 +382,16 @@ int validar_data(int dia, int mes, int ano){
 
         }else{
         //mes inválido e data é inválida
+            return
         }
     }else{
 
         //não é bissexto e data é inválida
     }
 
-    if(mes < 1 || mes > 12){
-        // correto
-    }else{
-        //mes inválido e data é inválida
-    }
 
-    if(bissexto == false){
-        //
-    }else{
-        if(mes == 2){
-            if(dia < 1 || dia > 29){
-                //inválido
-            }else{
-                //válido
-            }
-        }else if{
-            //validar mês de 30
-        }else if{
-            //validar mês de 31
-        }
-    }
+
+
 
 
 }
