@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+
 #define TAM_ALUNO 3
 #define TAM_PROF 3
 
@@ -28,6 +30,7 @@ typedef struct alu{
     char nome[50];
     char sexo;
     int ativo;
+    char cpf[15];
     Data dataNasc;
 } Aluno;
 
@@ -272,129 +275,6 @@ int main(void){
     return 0;
 }
 
-int validar_data(int dia, int mes, int ano){
-    if(ano % 4 == 0 && (ano % 400 || ano % 100 != 0)){
-        //bissexto
-        if(mes >= 1 || mes <= 12){
-        // correto
-
-            switch(mes){
-                case 1:{
-                    if(dia >= 1 || dia <= 31){
-                       //janeiro
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 2:{
-                    if(dia >= 1 || dia <= 29 ){
-                        //fevereiro com dia 29
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 3:{
-                    if(dia >= 1 || dia <= 31){
-                        //março
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 4:{
-                    if(dia >= 1 || dia <= 30){
-                        //abril
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 5:{
-                    if(dia >= 1 || dia <= 31){
-                        //maio
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 6:{
-                    if(dia >= 1 || dia <= 30){
-                        //junho
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 7:{
-                    if(dia >= 1 || dia <= 31){
-                        //julho
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 8:{
-                    if(dia >= 1 || dia <= 31){
-                        //agosto
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 9:{
-                    if(dia >= 1 || dia <= 30){
-                        //setembro
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 10:{
-                    if(dia >= 1 || dia <= 31){
-                        //outubro
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 11:{
-                    if(dia >= 1 || dia <= 30){
-                        //novembro
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                case 12:{
-                    if(dia >= 1 || dia <= 31){
-                        //dezembro
-                    }else{
-                        //data inválida
-                    }
-                    break;
-                }
-                default {
-                    break;
-                }
-            }
-
-        }else{
-        //mes inválido e data é inválida
-            return
-        }
-    }else{
-
-        //não é bissexto e data é inválida
-    }
-
-
-
-
-
-
-}
 
 
 int menu_geral(){
@@ -437,8 +317,11 @@ int cadastrar_aluno(Aluno listarAluno[], int qtdAluno){
         printf("Digite a Matricula: \n");
         int matricula;
         scanf("%d", &matricula);
+        getchar();
         if ( matricula < 0){
             return MATRICULA_INVALIDA;
+        }else{
+            listarAluno[qtdAluno].matricula = matricula;
         }
 
         printf("Digite nome: \n");
@@ -462,8 +345,16 @@ int cadastrar_aluno(Aluno listarAluno[], int qtdAluno){
 
         printf("Digite o ano de nascimento: \n");
         scanf("%d", &listarAluno[qtdAluno].dataNasc.ano);
+        getchar();
 
-        listarAluno[qtdAluno].matricula = matricula;
+        printf("Digite o CPF: ");
+        fgets(listarAluno[qtdAluno].cpf, 15, stdin);
+        ln = strlen(listarAluno[qtdAluno].cpf) - 1;
+        if(listarAluno[qtdAluno].cpf[ln] == '\n')
+            listarAluno[qtdAluno].cpf[ln] = '\0';
+        printf("\n");
+
+
         listarAluno[qtdAluno].ativo = 1;
 
         return CAD_ALUNO_SUCESSO;
