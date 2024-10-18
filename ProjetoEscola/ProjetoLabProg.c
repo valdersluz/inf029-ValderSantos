@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #define TAM_ALUNO 3
 #define TAM_PROF 3
@@ -374,7 +375,7 @@ void listar_aluno(Aluno listarAluno[], int qtdAluno){
             printf("-------------\n");
             printf("Matricula: %d\n", listarAluno[i].matricula);
             printf("Nome: %s\n", listarAluno[i].nome);
-            printf("Sexo: %c\n");
+            printf("Sexo: %c\n", listarAluno[i].sexo);
             printf("Data Nascimento: %d/%d/%d\n", listarAluno[i].dataNasc.dia, listarAluno[i].dataNasc.mes, listarAluno[i].dataNasc.ano);
             printf("CPF: %s\n", listarAluno[i].cpf);
         }
@@ -497,7 +498,7 @@ void listar_professor(Professor listarProfessor[], int qtdProfessor){
 
         for(int i = 0; i < qtdProfessor; i++){
             if(listarProfessor[i].ativo == 1){
-                printf("matricula: %d\n", listarProfessor[i]);
+                printf("matricula: %d\n", listarProfessor[i].matricula);
             }
         }
 
