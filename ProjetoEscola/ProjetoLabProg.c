@@ -21,6 +21,8 @@
 #define ERRO_CAD_SEXO -10
 #define ERRO_CAD_DATA -11
 
+#define INVALIDO -12
+
 typedef struct dma {
     int dia;
     int mes;
@@ -44,6 +46,15 @@ typedef struct prof{
     char cpf[15];
     Data dataNasc;
 } Professor;
+
+typedef struct discp{
+    int codigo;
+    int matriculaProfessor;
+    int matriculaAluno;
+    char nome[20];
+    int semestre;
+
+} Disciplina;
 
 // protótipos das funções
 int menu_geral();
@@ -131,6 +142,10 @@ int main(void){
                             switch(retorno){
                                 case MATRICULA_INVALIDA:{
                                     printf("Matricula invalida\n");
+                                    break;
+                                }
+                                case INVALIDO:{
+                                    printf("Caractere invalido\n");
                                     break;
                                 }
                                 case MATRICULA_INEXISTENTE:{
@@ -386,6 +401,7 @@ void listar_aluno(Aluno listarAluno[], int qtdAluno){
 }
 
 int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
+    char escolha;
 
     printf("Atualizar Aluno\n");
 
@@ -399,13 +415,79 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
         for(int i = 0; i < qtdAluno; i++){
            if (matricula == listarAluno[i].matricula && listarAluno[i].ativo) {
                 //Atualização
-                printf("Digite a nova matricula\n");
+                printf("Deseja atualizar nome?: (S/N)\n");
+                getchar();
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar nome
+                    printf("Digite nome: \n");
+                    getchar();
+                    fgets(listarAluno[qtdAluno].nome, 50, stdin);
+                    size_t ln = strlen(listarAluno[i].nome) - 1;
+                    if(listarAluno[qtdAluno].nome[ln] == '\n'){
+                        listarAluno[qtdAluno].nome[ln] = '\0';
+                    }
+                }else if (escolha != 'N'){
+                    return INVALIDO;
+                }
+
+                printf("Deseja atualizar sexo? (S/N)\n");
+                getchar();
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar sexo
+                    printf("Digite o sexo: \n");
+                    scanf("%c", &listarAluno[i].sexo);
+                    listarAluno[qtdAluno].sexo = toupper(listarAluno[i].sexo);
+                    if(listarAluno[i].sexo != 'M' && listarAluno[i].sexo != 'F'){
+                        return ERRO_CAD_SEXO;
+                    }
+                }else if (escolha != 'N'){
+                    return INVALIDO;
+                }
+
+
+                printf("Deseja atualizar Data de Nascimento? (S/N)\n");
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar nome
+                    printf("Digite o dia de nascimento: \n");
+                    scanf("%d", &listarAluno[i].dataNasc.dia);
+
+                    printf("Digite o mês de nascimento: \n");
+                    scanf("%d", &listarAluno[i].dataNasc.mes);
+
+                    printf("Digite o ano de nascimento: \n");
+                    scanf("%d", &listarAluno[i].dataNasc.ano);
+                }else if(escolha != 'N'){
+                    return INVALIDO;
+                }
+
+                printf("Deseja atualizar CPF? (S/N)\n");
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar nome
+                    printf("Digite o CPF: ");
+                    fgets(listarAluno[i].cpf, 15, stdin);
+                    size_t ln = strlen(listarAluno[i].cpf) - 1;
+                    if(listarAluno[i].cpf[ln] == '\n')
+                    listarAluno[i].cpf[ln] = '\0';
+                    printf("\n");
+                }else if (escolha != 'N'){
+                    return INVALIDO;
+                }
+                /*
                 int novaMatricula;
                 scanf("%d", &novaMatricula);
                 if(matricula < 0){
                     return MATRICULA_INVALIDA;
                 }
                 listarAluno[i].matricula = novaMatricula;
+                */
                 achou = 1;
                 break;
            }
@@ -627,3 +709,6 @@ int excluir_professor(Professor listarProfessor[], int qtdProfessor){
 }
 
 
+
+
+/* -------------------------- DISCIPLINA -------------------------------------*/
