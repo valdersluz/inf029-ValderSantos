@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -40,6 +41,7 @@ typedef struct prof{
     char nome[50];
     int sexo;
     int ativo;
+    char cpf[15];
     Data dataNasc;
 } Professor;
 
@@ -199,7 +201,8 @@ int main(void){
                                 printf("Lista de professores cheia\n");
                             }else if(retorno == MATRICULA_INVALIDA){
                                 printf("Matricula Invalida\n");
-
+                            }else if(retorno == ERRO_CAD_SEXO) {
+                                printf("Sexo invalido\n");
                             }else{
                                 printf("Cadastrado com Sucesso\n");
                                 qtdProfessor++;
@@ -432,7 +435,12 @@ int excluir_aluno(Aluno listarAluno[], int qtdAluno){
 
                 for(int j = i; j < qtdAluno - 1; j++){ //shift
                     listarAluno[j].matricula = listarAluno[j+1].matricula;
+                    strcpy(listarAluno[j].nome, listarAluno[j+1].nome);
                     listarAluno[j].sexo = listarAluno[j+1].sexo;
+                    listarAluno[j].dataNasc.dia = listarAluno[j+1].dataNasc.dia;
+                    listarAluno[j].dataNasc.mes = listarAluno[j+1].dataNasc.mes;
+                    listarAluno[j].dataNasc.ano = listarAluno[j+1].dataNasc.ano;
+                    strcpy(listarAluno[j].cpf, listarAluno[j+1].cpf);
                     listarAluno[j].ativo = listarAluno[j+1].ativo;
                 }
                 achou = 1;
@@ -474,15 +482,47 @@ int cadastrar_professor(Professor listarProfessor[], int qtdProfessor){
     }else {
         printf("Digite a matricula\n");
         int matricula;
-
         scanf("%d", &matricula);
-
+        getchar();
         if(matricula < 0){
             return MATRICULA_INVALIDA;
         }else {
             listarProfessor[qtdProfessor].matricula = matricula;
-            listarProfessor[qtdProfessor].ativo = 1;
         }
+
+        printf("Digite nome: \n");
+        fgets(listarProfessor[qtdProfessor].nome, 50, stdin);
+        size_t ln = strlen(listarProfessor[qtdProfessor].nome) - 1;
+        if(listarProfessor[qtdProfessor].nome[ln] == '\n')
+            listarProfessor[qtdProfessor].nome[ln] = '\0';
+
+        printf("Digite o sexo: \n");
+        scanf("%c", &listarProfessor[qtdProfessor].sexo);
+        listarProfessor[qtdProfessor].sexo = toupper(listarProfessor[qtdProfessor].sexo);
+        if(listarProfessor[qtdProfessor].sexo != 'M' && listarProfessor[qtdProfessor].sexo != 'F'){
+            return ERRO_CAD_SEXO;
+        }
+
+        printf("Digite o dia de nascimento: \n");
+        scanf("%d", &listarProfessor[qtdProfessor].dataNasc.dia);
+
+        printf("Digite o mês de nascimento: \n");
+        scanf("%d", &listarProfessor[qtdProfessor].dataNasc.mes);
+
+        printf("Digite o ano de nascimento: \n");
+        scanf("%d", &listarProfessor[qtdProfessor].dataNasc.ano);
+        getchar();
+
+
+        printf("Digite o CPF: ");
+        fgets(listarProfessor[qtdProfessor].cpf, 15, stdin);
+        ln = strlen(listarProfessor[qtdProfessor].cpf) - 1;
+        if(listarProfessor[qtdProfessor].cpf[ln] == '\n'){
+            listarProfessor[qtdProfessor].cpf[ln] = '\0';
+        }
+        printf("\n");
+
+        listarProfessor[qtdProfessor].ativo = 1;
 
         return CAD_PROF_SUCESSO;
     }
@@ -498,7 +538,12 @@ void listar_professor(Professor listarProfessor[], int qtdProfessor){
 
         for(int i = 0; i < qtdProfessor; i++){
             if(listarProfessor[i].ativo == 1){
+                printf("-------------\n");
                 printf("matricula: %d\n", listarProfessor[i].matricula);
+                printf("Nome: %s\n", listarProfessor[i].nome);
+                printf("Sexo: %c\n", listarProfessor[i].sexo);
+                printf("Data de Nascimento: %d/%d/%d\n", listarProfessor[i].dataNasc.dia, listarProfessor[i].dataNasc.mes, listarProfessor[i].dataNasc.ano);
+                printf("CPF: %s\n", listarProfessor[i].cpf);
             }
         }
 
@@ -555,10 +600,14 @@ int excluir_professor(Professor listarProfessor[], int qtdProfessor){
                 //exclusão lógica
                 listarProfessor[i].ativo = -1;
 
-                for(int j = i; j < qtdProfessor - 1; j++){
-
+                for(int j = i; j < qtdProfessor - 1; j++){ //shift
                     listarProfessor[j].matricula = listarProfessor[j+1].matricula;
+                    strcpy(listarProfessor[j].nome, listarProfessor[j+1].nome);
                     listarProfessor[j].sexo = listarProfessor[j+1].sexo;
+                    listarProfessor[j].dataNasc.dia = listarProfessor[j+1].dataNasc.dia;
+                    listarProfessor[j].dataNasc.mes = listarProfessor[j+1].dataNasc.mes;
+                    listarProfessor[j].dataNasc.ano = listarProfessor[j+1].dataNasc.ano;
+                    strcpy(listarProfessor[j].cpf, listarProfessor[j+1].cpf);
                     listarProfessor[j].ativo = listarProfessor[j+1].ativo;
                 }
 
