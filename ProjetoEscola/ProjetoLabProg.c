@@ -315,7 +315,7 @@ int menu_geral(){
         return opcao;
 }
 
-/* -------------------------- PROFESSOR -------------------------------------*/
+/* -------------------------- [ALUNO] -------------------------------------*/
 
 
 int menu_aluno(){
@@ -427,7 +427,7 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                 scanf("%c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
-                    //trocar nome
+                    //trocar NOME
                     printf("Digite nome: \n");
                     getchar();
                     fgets(listarAluno[i].nome, 50, stdin);
@@ -444,7 +444,7 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                 scanf("%c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
-                    //trocar sexo
+                    //trocar SEXO
                     printf("Digite o sexo: \n");
                     getchar();
                     scanf("%c", &listarAluno[i].sexo);
@@ -462,7 +462,7 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                 scanf("%c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
-                    //trocar nome
+                    //trocar DATA NASCIMENTO
                     printf("Digite o dia de nascimento: \n");
                     scanf("%d", &listarAluno[i].dataNasc.dia);
 
@@ -480,7 +480,7 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                 scanf("%c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
-                    //trocar nome
+                    //trocar CPF
                     printf("Digite o CPF: ");
                     getchar();
                     fgets(listarAluno[i].cpf, 15, stdin);
@@ -491,14 +491,6 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                 }else if (escolha != 'N'){
                     return INVALIDO;
                 }
-                /*
-                int novaMatricula;
-                scanf("%d", &novaMatricula);
-                if(matricula < 0){
-                    return MATRICULA_INVALIDA;
-                }
-                listarAluno[i].matricula = novaMatricula;
-                */
                 achou = 1;
                 break;
            }
@@ -646,6 +638,8 @@ void listar_professor(Professor listarProfessor[], int qtdProfessor){
 
 
 int atualizar_professor(Professor listarProfessor[], int qtdProfessor){
+    char escolha;
+
     printf("Atualizar Professor\n");
 
     printf("Digite a matricula: \n");
@@ -657,25 +651,90 @@ int atualizar_professor(Professor listarProfessor[], int qtdProfessor){
     }else {
         for(int i = 0; i < qtdProfessor; i++){
             if(matricula == listarProfessor[i].matricula && listarProfessor[i].ativo){
-                printf("digite a nova matricula: \n");
-                int novaMatricula;
-                scanf("%d", &novaMatricula);
-                if(novaMatricula < 0){
-                   return MATRICULA_INVALIDA;
-                }else {
-                    listarProfessor[i].matricula = novaMatricula;
-                    achou = 1;
-                    break;
+                //Atualização
+                printf("Deseja atualizar nome? (S/N)\n");
+                getchar();
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar NOME
+                    printf("Digite nome: \n");
+                    getchar();
+                    fgets(listarProfessor[i].nome, 50, stdin);
+                    size_t ln = strlen(listarProfessor[i].nome) - 1;
+                    if(listarProfessor[qtdProfessor].nome[ln] == '\n'){
+                        listarProfessor[qtdProfessor].nome[ln] = '\0';
+                    }
+                }else if (escolha != 'N'){
+                    return INVALIDO;
                 }
+
+                printf("Deseja atualizar sexo? (S/N)\n");
+                getchar();
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar SEXO
+                    printf("Digite o sexo: \n");
+                    getchar();
+                    scanf("%c", &listarProfessor[i].sexo);
+                    listarProfessor[i].sexo = toupper(listarProfessor[i].sexo);
+                    if(listarProfessor[i].sexo != 'M' && listarProfessor[i].sexo != 'F'){
+                        return ERRO_CAD_SEXO;
+                    }
+                }else if (escolha != 'N'){
+                    return INVALIDO;
+                }
+
+
+                printf("Deseja atualizar Data de Nascimento? (S/N)\n");
+                getchar();
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar DATA DE NASCIMENTO
+                    printf("Digite o dia de nascimento: \n");
+                    scanf("%d", &listarProfessor[i].dataNasc.dia);
+
+                    printf("Digite o mês de nascimento: \n");
+                    scanf("%d", &listarProfessor[i].dataNasc.mes);
+
+                    printf("Digite o ano de nascimento: \n");
+                    scanf("%d", &listarProfessor[i].dataNasc.ano);
+                }else if (escolha != 'N'){
+                    return INVALIDO;
+                }
+
+
+                printf("Deseja atualizar CPF? (S/N)\n");
+                getchar();
+                scanf("%c", &escolha);
+                escolha = toupper(escolha);
+                if(escolha == 'S'){
+                    //trocar CPF
+                    printf("Digite o CPF: ");
+                    getchar();
+                    fgets(listarProfessor[i].cpf, 15, stdin);
+                    size_t ln = strlen(listarProfessor[i].cpf) - 1;
+                    if(listarProfessor[i].cpf[ln] == '\n')
+                        listarProfessor[i].cpf[ln] = '\0';
+
+                    printf("\n");
+                }else if(escolha != 'N'){
+                    return INVALIDO;
+                }
+
+                achou = 1;
+                break;
             }
         }
+
         if(achou){
             return ATUALIZACAO_PROF_SUCESSO;
         }else {
             return MATRICULA_INEXISTENTE;
         }
     }
-
 }
 
 int excluir_professor(Professor listarProfessor[], int qtdProfessor){
