@@ -5,6 +5,7 @@
 
 #define TAM_ALUNO 3
 #define TAM_PROF 3
+#define TAM_DISCP 3
 
 #define CAD_ALUNO_SUCESSO -1
 #define MATRICULA_INVALIDA -2
@@ -41,7 +42,7 @@ typedef struct alu{
 typedef struct prof{
     int matricula;
     char nome[50];
-    int sexo;
+    char sexo;
     int ativo;
     char cpf[15];
     Data dataNasc;
@@ -237,6 +238,10 @@ int main(void){
                                     printf("Matricula invalida\n");
                                     break;
                                 }
+                                case INVALIDO:{
+                                    printf("Caractere invalido\n");
+                                    break;
+                                }
                                 case MATRICULA_INEXISTENTE:{
                                     printf("Matricula Inexistente\n");
                                     break;
@@ -309,6 +314,8 @@ int menu_geral(){
 
         return opcao;
 }
+
+/* -------------------------- PROFESSOR -------------------------------------*/
 
 
 int menu_aluno(){
@@ -423,7 +430,7 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                     //trocar nome
                     printf("Digite nome: \n");
                     getchar();
-                    fgets(listarAluno[qtdAluno].nome, 50, stdin);
+                    fgets(listarAluno[i].nome, 50, stdin);
                     size_t ln = strlen(listarAluno[i].nome) - 1;
                     if(listarAluno[qtdAluno].nome[ln] == '\n'){
                         listarAluno[qtdAluno].nome[ln] = '\0';
@@ -439,8 +446,9 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                 if(escolha == 'S'){
                     //trocar sexo
                     printf("Digite o sexo: \n");
+                    getchar();
                     scanf("%c", &listarAluno[i].sexo);
-                    listarAluno[qtdAluno].sexo = toupper(listarAluno[i].sexo);
+                    listarAluno[i].sexo = toupper(listarAluno[i].sexo);
                     if(listarAluno[i].sexo != 'M' && listarAluno[i].sexo != 'F'){
                         return ERRO_CAD_SEXO;
                     }
@@ -450,6 +458,7 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
 
 
                 printf("Deseja atualizar Data de Nascimento? (S/N)\n");
+                getchar();
                 scanf("%c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
@@ -467,11 +476,13 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                 }
 
                 printf("Deseja atualizar CPF? (S/N)\n");
+                getchar();
                 scanf("%c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
                     //trocar nome
                     printf("Digite o CPF: ");
+                    getchar();
                     fgets(listarAluno[i].cpf, 15, stdin);
                     size_t ln = strlen(listarAluno[i].cpf) - 1;
                     if(listarAluno[i].cpf[ln] == '\n')
