@@ -24,6 +24,10 @@
 
 #define INVALIDO -12
 
+#define CAD_DISCP_SUCESSO -13
+
+
+
 typedef struct dma {
     int dia;
     int mes;
@@ -49,11 +53,12 @@ typedef struct prof{
 } Professor;
 
 typedef struct discp{
-    int codigo;
+    char codigo[6];
     int matriculaProfessor;
     int matriculaAluno;
     char nome[20];
     int semestre;
+    int ativo;
 
 } Disciplina;
 
@@ -62,6 +67,7 @@ int menu_geral();
 
 int menu_aluno();
 int menu_professor();
+int menu_disciplina();
 
 int cadastrar_aluno(Aluno listarAluno[], int qtdAluno);
 void listar_aluno(Aluno listarAluno[], int qtdAluno);
@@ -73,6 +79,7 @@ void listar_professor(Professor listarProfessor[], int qtdProfessor);
 int atualizar_professor(Professor listarProfessor[], int qtdProfessor);
 int excluir_professor(Professor listarProfessor[], int qtdProfessor);
 
+int cadastrar_disciplina(Aluno listarAluno[], Professor listarProfessor[], int qtdAluno, int qtdProfessor, Disciplina listarDisciplina[], int qtdDisciplina);
 // modularização
 // utilizar um gerador automático de matrícula
 // inserir novos atributos na struct aluno e fazer a leitura desses atributos
@@ -85,9 +92,11 @@ int main(void){
 
     Aluno listarAluno[TAM_ALUNO];
     Professor listarProfessor[TAM_PROF];
+    Disciplina listarDisciplina[TAM_DISCP];
     int opcao;
     int qtdAluno = 0;
     int qtdProfessor = 0;
+    int qtdDisciplina = 0;
     int sair = 0;
 
     while(!sair){
@@ -180,9 +189,6 @@ int main(void){
                                     break;
                                 }
                             }
-
-
-
 
                             break;
                         }
@@ -288,6 +294,57 @@ int main(void){
             }
             case 3:{
                 printf("Modulo Disciplina\n");
+                int sairDisciplina = 0;
+                int opcaoDisciplina;
+
+                while(!sairDisciplina){
+
+                    opcaoDisciplina = menu_disciplina();
+
+                    switch(opcaoDisciplina){
+                        case 0:{
+                            // sair
+                            sairDisciplina = 1;
+                            break;
+                        }
+                        case 1:{
+                            //cadastrar
+
+
+                            int retorno = cadastrar_disciplina(listarAluno, listarProfessor, qtdAluno, qtdProfessor, listarDisciplina, qtdDisciplina);
+
+
+                            /*
+                            if(retorno == LISTA_CHEIA){
+                                printf("Lista de disciplinas cheia");
+                            }
+                            else if(){
+                                printf("Codigo Invalido\n");
+                            }else if(){
+                                printf("");
+                            }*/
+
+                            break;
+                        }
+                        case 2:{
+                            //listar
+                            break;
+                        }
+                        case 3:{
+                            //atualizar
+                            break;
+                        }
+                        case 4:{
+                            //excluir
+                            break;
+                        }
+                        default:{
+                            printf("Opcao Invalida\n");
+                        }
+
+                    }
+
+                }
                 break;
             }
             default:{
@@ -782,3 +839,81 @@ int excluir_professor(Professor listarProfessor[], int qtdProfessor){
 
 
 /* -------------------------- DISCIPLINA -------------------------------------*/
+
+
+int menu_disciplina(){
+    int opcao;
+
+    printf("0 - Voltar\n");
+    printf("1 - Cadastrar Disciplina\n");
+    printf("2 - Listar Disciplina\n");
+    printf("3 - Atualizar Disciplina\n");
+    printf("4 - Excluir Disciplina\n");
+
+    scanf("%d", &opcao);
+
+    return opcao;
+}
+
+
+int cadastrar_disciplina(Aluno listarAluno[], Professor listarProfessor[], int qtdAluno, int qtdProfessor, Disciplina listarDisciplina[], int qtdDisciplina){
+    printf("Cadastrar Disciplina\n");
+
+    if (qtdDisciplina >= TAM_DISCP){
+        return LISTA_CHEIA;
+    }else{
+        //colocar a matrícula e validar se ela existe?
+        listarDisciplina[qtdDisciplina].matriculaAluno = listarAluno[qtdAluno].matricula;
+        listarDisciplina[qtdDisciplina].matriculaProfessor = listarProfessor[qtdProfessor].matricula;
+
+        printf("Digite o Código da Disciplina: \n");
+        fgets(listarDisciplina[qtdDisciplina].codigo, 6,stdin);
+        size_t ln = strlen(listarDisciplina[qtdDisciplina].codigo) - 1;
+        if(listarDisciplina[qtdDisciplina].codigo[ln] == '\n')
+            listarDisciplina[qtdDisciplina].codigo[ln] = '\0';
+
+        printf("Digite nome: \n");
+        fgets(listarDisciplina[qtdDisciplina].nome, 20, stdin);
+        size_t ln = strlen(listarDisciplina[qtdDisciplina].nome) - 1;
+        if(listarDisciplina[qtdDisciplina].nome[ln] == '\n'){
+            listarDisciplina[qtdDisciplina].nome[ln] = '\0';
+        }
+
+        printf("Digite o semestre: \n");
+        scanf("%d", &semestre);
+
+        listarDisciplina[qtdDisciplina].ativo = 1;
+
+
+        return CAD_DISCP_SUCESSO;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
