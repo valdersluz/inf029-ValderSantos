@@ -59,6 +59,7 @@ typedef struct discp{
     char nome[20];
     int semestre;
     int ativo;
+    int vaga;
 
 } Disciplina;
 
@@ -719,6 +720,7 @@ int atualizar_professor(Professor listarProfessor[], int qtdProfessor){
                     getchar();
                     fgets(listarProfessor[i].nome, 50, stdin);
                     size_t ln = strlen(listarProfessor[i].nome) - 1;
+
                     if(listarProfessor[qtdProfessor].nome[ln] == '\n'){
                         listarProfessor[qtdProfessor].nome[ln] = '\0';
                     }
@@ -727,14 +729,14 @@ int atualizar_professor(Professor listarProfessor[], int qtdProfessor){
                 }
 
                 printf("Deseja atualizar sexo? (S/N)\n");
-                getchar();
                 scanf("%c", &escolha);
+                getchar();
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
                     //trocar SEXO
                     printf("Digite o sexo: \n");
-                    getchar();
                     scanf("%c", &listarProfessor[i].sexo);
+                    getchar();
                     listarProfessor[i].sexo = toupper(listarProfessor[i].sexo);
                     if(listarProfessor[i].sexo != 'M' && listarProfessor[i].sexo != 'F'){
                         return ERRO_CAD_SEXO;
@@ -745,8 +747,8 @@ int atualizar_professor(Professor listarProfessor[], int qtdProfessor){
 
 
                 printf("Deseja atualizar Data de Nascimento? (S/N)\n");
-                getchar();
                 scanf("%c", &escolha);
+                getchar();
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
                     //trocar DATA DE NASCIMENTO
@@ -758,19 +760,20 @@ int atualizar_professor(Professor listarProfessor[], int qtdProfessor){
 
                     printf("Digite o ano de nascimento: \n");
                     scanf("%d", &listarProfessor[i].dataNasc.ano);
+                    getchar();
                 }else if (escolha != 'N'){
                     return INVALIDO;
                 }
 
 
                 printf("Deseja atualizar CPF? (S/N)\n");
-                getchar();
                 scanf("%c", &escolha);
+                getchar();
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
                     //trocar CPF
                     printf("Digite o CPF: ");
-                    getchar();
+
                     fgets(listarProfessor[i].cpf, 15, stdin);
                     size_t ln = strlen(listarProfessor[i].cpf) - 1;
                     if(listarProfessor[i].cpf[ln] == '\n')
@@ -863,24 +866,27 @@ int cadastrar_disciplina(Aluno listarAluno[], Professor listarProfessor[], int q
         return LISTA_CHEIA;
     }else{
         //colocar a matrícula e validar se ela existe?
-        listarDisciplina[qtdDisciplina].matriculaAluno = listarAluno[qtdAluno].matricula;
-        listarDisciplina[qtdDisciplina].matriculaProfessor = listarProfessor[qtdProfessor].matricula;
+        //listarDisciplina[qtdDisciplina].matriculaAluno = listarAluno[qtdAluno].matricula;
+        //listarDisciplina[qtdDisciplina].matriculaProfessor = listarProfessor[qtdProfessor].matricula;
 
         printf("Digite o Código da Disciplina: \n");
         fgets(listarDisciplina[qtdDisciplina].codigo, 6,stdin);
+        getchar();
         size_t ln = strlen(listarDisciplina[qtdDisciplina].codigo) - 1;
         if(listarDisciplina[qtdDisciplina].codigo[ln] == '\n')
             listarDisciplina[qtdDisciplina].codigo[ln] = '\0';
 
+        getchar();
         printf("Digite nome: \n");
+
         fgets(listarDisciplina[qtdDisciplina].nome, 20, stdin);
-        size_t ln = strlen(listarDisciplina[qtdDisciplina].nome) - 1;
+        ln = strlen(listarDisciplina[qtdDisciplina].nome) - 1;
         if(listarDisciplina[qtdDisciplina].nome[ln] == '\n'){
             listarDisciplina[qtdDisciplina].nome[ln] = '\0';
         }
 
         printf("Digite o semestre: \n");
-        scanf("%d", &semestre);
+        scanf("%d", &listarDisciplina[qtdDisciplina].semestre);
 
         listarDisciplina[qtdDisciplina].ativo = 1;
 
