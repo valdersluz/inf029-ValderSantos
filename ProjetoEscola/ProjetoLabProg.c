@@ -875,10 +875,9 @@ int cadastrar_disciplina(Aluno listarAluno[], Professor listarProfessor[], int q
         size_t ln = strlen(listarDisciplina[qtdDisciplina].codigo) - 1;
         if(listarDisciplina[qtdDisciplina].codigo[ln] == '\n')
             listarDisciplina[qtdDisciplina].codigo[ln] = '\0';
+        while(getchar() != '\n');
 
-        getchar();
         printf("Digite nome: \n");
-
         fgets(listarDisciplina[qtdDisciplina].nome, 20, stdin);
         ln = strlen(listarDisciplina[qtdDisciplina].nome) - 1;
         if(listarDisciplina[qtdDisciplina].nome[ln] == '\n'){
@@ -886,6 +885,7 @@ int cadastrar_disciplina(Aluno listarAluno[], Professor listarProfessor[], int q
         }
 
         printf("Digite o semestre: \n");
+        while(getchar() != '\n');
         scanf("%d", &listarDisciplina[qtdDisciplina].semestre);
 
         listarDisciplina[qtdDisciplina].ativo = 1;
