@@ -489,17 +489,25 @@ int atualizar_aluno(Aluno listarAluno[], int qtdAluno){
                     printf("Digite nome: \n");
                     getchar();
                     fgets(listarAluno[i].nome, 50, stdin);
-                    size_t ln = strlen(listarAluno[i].nome) - 1;
-                    if(listarAluno[qtdAluno].nome[ln] == '\n'){
-                        listarAluno[qtdAluno].nome[ln] = '\0';
+
+                    size_t ln = strlen(listarAluno[i].nome);
+                    if (ln > 0 && listarAluno[i].nome[ln - 1] == '\n') {
+                        listarAluno[i].nome[ln - 1] = '\0';
+                    } else {
+                        int c;
+                        while ((c = getchar()) != '\n' && c != EOF) { }
                     }
+
+                    //size_t ln = strlen(listarAluno[i].nome) - 1;
+                    //if(listarAluno[qtdAluno].nome[ln] == '\n'){
+                    //    listarAluno[qtdAluno].nome[ln] = '\0';
+                    //}
                 }else if (escolha != 'N'){
                     return INVALIDO;
                 }
 
                 printf("Deseja atualizar sexo? (S/N)\n");
-                getchar();
-                scanf("%c", &escolha);
+                scanf(" %c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
                     //trocar SEXO
