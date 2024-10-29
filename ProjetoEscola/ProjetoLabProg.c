@@ -719,19 +719,27 @@ int atualizar_professor(Professor listarProfessor[], int qtdProfessor){
             if(matricula == listarProfessor[i].matricula && listarProfessor[i].ativo){
                 //Atualização
                 printf("Deseja atualizar nome? (S/N)\n");
-                while(getchar() != '\n');
+                getchar();
                 scanf("%c", &escolha);
                 escolha = toupper(escolha);
                 if(escolha == 'S'){
                     //trocar NOME
                     printf("Digite nome: \n");
-                    while(getchar() != '\n');
+                    getchar();
                     fgets(listarProfessor[i].nome, 50, stdin);
-                    size_t ln = strlen(listarProfessor[i].nome) - 1;
+                    size_t ln = strlen(listarProfessor[i].nome);
 
+                    if (ln > 0 && listarProfessor[i].nome[ln - 1] == '\n') {
+                        listarProfessor[i].nome[ln - 1] = '\0';
+                    } else {
+                        int c;
+                        while ((c = getchar()) != '\n' && c != EOF) { }
+                    }
+
+                    /*
                     if(listarProfessor[i].nome[ln] == '\n'){
                         listarProfessor[i].nome[ln] = '\0';
-                    }
+                    }*/
                 }else if (escolha != 'N'){
                     return INVALIDO;
                 }
@@ -898,6 +906,11 @@ int cadastrar_disciplina(Aluno listarAluno[], Professor listarProfessor[], int q
         printf("Digite o semestre: \n");
         while(getchar() != '\n');
         scanf("%d", &listarDisciplina[qtdDisciplina].semestre);
+
+        printf("Digite a matrícula do Professor: \n");
+        int matriculaProf;
+        scanf("%d", &matriculaProf);
+
 
         listarDisciplina[qtdDisciplina].ativo = 1;
 
