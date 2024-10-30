@@ -5,6 +5,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#define COD 6
+#define TAM_NOME
 #define TAM_ALUNO 10
 #define TAM_PROFESSOR 10
 #define TAM_DISCIPLINA 10
@@ -51,7 +53,7 @@ typedef struct pro{
 
 typedef struct dis{
     char nome[40];
-    char codigo[6];
+    char codigo[COD];
     int semestre;
     int matriculaProf;
     int alunos[43];
@@ -615,22 +617,37 @@ int cadastrarDisciplina(Disciplina listaDisciplina[], int qtdDisciplina){
         return LISTA_CHEIA;
     }
     else {
-        printf("Digite o nome da disciplina:  ");
-        getchar();
-        fgets(listaDisciplina[qtdDisciplina].nome, sizeof(listaDisciplina[qtdDisciplina].nome), stdin);
-        listaDisciplina[qtdDisciplina].nome[strcspn(listaDisciplina[qtdDisciplina].nome, "\n")] = 0;
+        printf("Digite o nome da disciplina: ");
 
-        printf("Digite o código da disciplina:  ");
-        getchar();
+        fgets(listaDisciplina[qtdDisciplina].nome, sizeof(listaDisciplina[qtdDisciplina].nome), stdin);
+        listaDisciplina[qtdDisciplina].nome[strcspn(listaDisciplina[qtdDisciplina].nome, "\n")] = '\0';
+        /*
+        size_t ln = strlen(listaDisciplina[qtdDisciplina].nome);
+        if(ln > 0 && listaDisciplina[qtdDisciplina].nome[ln - 1] == '\n'){
+            listaDisciplina[qtdDisciplina].nome[ln - 1] = '\0';
+        }else{
+            int c;
+            while((c = getchar()) != '\n' && c != EOF){ }
+        }*/
+
+        printf("Digite o código da disciplina: ");
         fgets(listaDisciplina[qtdDisciplina].codigo, sizeof(listaDisciplina[qtdDisciplina].codigo), stdin);
-        listaDisciplina[qtdDisciplina].codigo[strcspn(listaDisciplina[qtdDisciplina].codigo, "\n")] = 0;
+        listaDisciplina[qtdDisciplina].codigo[strcspn(listaDisciplina[qtdDisciplina].codigo, "\n")] = '\0';
+        /*
+        ln = strlen(listaDisciplina[qtdDisciplina].codigo);
+        if(ln > 0 && listaDisciplina[qtdDisciplina].codigo[ln - 1] == '\n'){
+            listaDisciplina[qtdDisciplina].codigo[ln - 1] = '\0';
+        }else{
+            int c;
+            while((c = getchar()) != '\n' && c != EOF){ }
+        }*/
 
         printf("Digite a qual semestre ela pertence:  ");
         scanf(" %d", &listaDisciplina[qtdDisciplina].semestre);
-
+        while(getchar() != '\n');
         printf("Qual a matricula do professor que a leciona:  ");
         scanf(" %d", &listaDisciplina[qtdDisciplina].matriculaProf);
-
+        while(getchar() != '\n');
         listaDisciplina[qtdDisciplina].ativo = 1;
 
         return CAD_SUCESSO;
@@ -756,7 +773,7 @@ void cadastrarAlunoNaDiciplina(Aluno listaAluno[], Disciplina listaDisciplina[],
      strtok(BuscaDiciplina, "\n");
 
     for (int i = 0; i < qtdDisciplina; i++){
-        if (strcmp(listaDisciplina[i].nome, BuscaDiciplina == 0)){
+        if (strcmp(listaDisciplina[i].nome, BuscaDiciplina) == 0){
             achou = 1;
             local = i;
         }
@@ -769,7 +786,7 @@ void cadastrarAlunoNaDiciplina(Aluno listaAluno[], Disciplina listaDisciplina[],
         achou = 0;
         printf("Digite o nome do aluno que deseja cadastrar: ");
         fgets(BuscaAluno,30,stdin);
-        strtok(BuscaDiciplina, "\n");
+        strtok(BuscaAluno, "\n");
         for (int i = 0; i < qtdAluno; i++){
             if (strcmp(listaAluno[i].nome, BuscaAluno) == 0){
                 achou = 1;
