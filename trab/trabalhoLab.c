@@ -31,6 +31,7 @@ typedef struct alu{
     DataNascimento nascimento;
     char cpf[12];
     int ativo;
+    int disciplina;
  } Aluno;
 
 typedef struct aux{
@@ -52,7 +53,7 @@ typedef struct dis{
     char codigo[6];
     int semestre;
     int matriculaProf;
-    int alunos[TAM_ALUNO];
+    int alunos[43];
     int ativo;
  } Disciplina;
 
@@ -735,6 +736,33 @@ int excluirDisciplina(Disciplina listaDisciplina[], int qtdDisciplina){
     }
 
 }
+
+
+//----------------------------EU TO AQUI-----------------------------
+
+/*
+matricularAluno(Aluno listaAluno[], Disciplina listaDisciplina[], int qtdAluno, int qtdDisciplina){
+    printf("Digite a matricula do Aluno: ");
+    int matriculaAluno;
+    scanf("%d", &matriculaAluno);
+
+    if(matriculaAluno < 0){
+        printf("Matricula Invalida");
+    }else{
+        for(int i = 0; i < qtdDisciplina; i++){
+           if(listaAluno[i].matricula == matriculaAluno){
+                listaDisciplina[i].alunos[]
+
+           }
+
+        }
+
+    }
+
+}
+
+*/
+
 
 //FUNÇÕES RELATÓRIOS
 int menuRelatorio(){
