@@ -20,7 +20,9 @@
 //renomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.h
 #include "ValderLuz20241160034.h"
 
-//void testSomar();    //função utilizada para testes
+
+
+void testSomar();    //função utilizada para testes
 //void testFatorial(); //função utilizada para testes
 //void testQ1();
 //void testQ2();
@@ -31,7 +33,7 @@
 
 int main()
 {
-    //testSomar();
+    testSomar();
     //testFatorial();
     //testQ1();
     //testQ2();
@@ -41,7 +43,7 @@ int main()
     testQ6();*/
 }
 
-/*
+
 void testSomar()
 {
     printf("%d\n", somar(3, 4) == 7);
@@ -53,7 +55,7 @@ void testSomar()
     printf("%d\n", somar(1000, 99) == 1099);
 
 }
-
+/*
 void testFatorial()
 {
     printf("%d\n", fatorial(3) == 6);
@@ -188,4 +190,4 @@ void testQ6()
     printf("%d\n", q6(3539343, 3) == 4);
     printf("%d\n", q6(3539343, 39) == 1);
 }
-*/
+//*/

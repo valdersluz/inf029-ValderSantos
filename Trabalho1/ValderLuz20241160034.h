@@ -1,11 +1,5 @@
-#ifndef VALDERLUZ20241160034_H_INCLUDED
-#define VALDERLUZ20241160034_H_INCLUDED
-
-
-
-#endif // VALDERLUZ20241160034_H_INCLUDED
-
-
+#ifndef VALDERLUZ20241160034_H
+#define VALDERLUZ20241160034_H
 
 // #################################################
 //  Instituto Federal da Bahia
@@ -20,17 +14,17 @@
 //  O aluno deve preencher seus dados abaixo, e implementar as questões do trabalho
 
 //  ----- Dados do Aluno -----
-//  Nome:
-//  email:
-//  Matrícula:
-//  Semestre:
+//  Nome: Valder Santos da Luz
+//  email: valder.sluz@gmail.com
+//  Matrícula: 20241160034
+//  Semestre: 2024.2
 
 //  Copyright © 2016 Renato Novais. All rights reserved.
 // Última atualização: 07/05/2021
 
 // #################################################
-#ifndef TRABALHO1_PRIMEIROULTIMONOMEMATRICULA_H
-#define TRABALHO1_PRIMEIROULTIMONOMEMATRICULA_H
+//#ifndef ValderLuz20241160034.h
+//#define ValderLuz20241160034.h
 
 typedef struct DQ
 {
@@ -60,4 +54,5 @@ int q5(int num);
 int q6(int numerobase, int numerobusca);
 DataQuebrada quebraData(char data[]);
 
-#endif  // TRABALHO1_PRIMEIROULTIMONOMEMATRICULA_H
+#endif
+//#endif  // TRABALHO1_PRIMEIROULTIMONOMEMATRICULA_H
