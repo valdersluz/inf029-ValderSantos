@@ -22,8 +22,8 @@
 
 
 
-void testSomar();    //função utilizada para testes
-//void testFatorial(); //função utilizada para testes
+//void testSomar();    //função utilizada para testes
+void testFatorial(); //função utilizada para testes
 //void testQ1();
 //void testQ2();
 //void testQ3();
@@ -34,7 +34,7 @@ void testSomar();    //função utilizada para testes
 int main()
 {
     testSomar();
-    //testFatorial();
+    testFatorial();
     //testQ1();
     //testQ2();
     /*testQ3();
@@ -55,7 +55,7 @@ void testSomar()
     printf("%d\n", somar(1000, 99) == 1099);
 
 }
-/*
+
 void testFatorial()
 {
     printf("%d\n", fatorial(3) == 6);
@@ -77,7 +77,7 @@ void testQ1()
     strcpy(str, "/9/2014");
     printf("%d\n", q1(str) == 0);
 }
-
+/*
 void testQ2()
 {
     char datainicial[11], datafinal[11];
