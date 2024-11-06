@@ -92,17 +92,18 @@ int teste(int a)
  */
 int q1(char data[])
 {
-  int datavalida = 1;
+    DataQuebrada dq = quebraData(data);
+    int datavalida = 1;
 
-  //quebrar a string data em strings sDia, sMes, sAno
+    //quebrar a string data em strings sDia, sMes, sAno
 
 
-  //printf("%s\n", data);
+    //printf("%s\n", data);
 
-  if (datavalida)
-      return 1;
-  else
-      return 0;
+    if (datavalida)
+        return 1;
+    else
+        return 0;
 }
 
 
@@ -223,7 +224,7 @@ int q6(int numerobase, int numerobusca)
 
 DataQuebrada quebraData(char data[]){
   DataQuebrada dq;
-  char sDia[3];
+    char sDia[3];
 	char sMes[3];
 	char sAno[5];
 	int i;
@@ -233,6 +234,11 @@ DataQuebrada quebraData(char data[]){
 	}
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sDia[i] = '\0';  // coloca o barra zero no final
+		for (i = 0; sDia[i] != '\0'; i++){
+           if((sDia >= 'a' && sDia <= 'z') || (sDia >= 'A' && sDia <= 'Z')){
+                dq.valido = 1;
+           }
+		}
 	}else {
 		dq.valido = 0;
     return dq;

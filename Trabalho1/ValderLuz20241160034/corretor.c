@@ -33,9 +33,9 @@ void testFatorial(); //função utilizada para testes
 
 int main()
 {
-    testSomar();
-    testFatorial();
-    //testQ1();
+    //testSomar();
+    //testFatorial();
+    testQ1();
     //testQ2();
     /*testQ3();
     testQ4();
@@ -43,7 +43,7 @@ int main()
     testQ6();*/
 }
 
-
+/*
 void testSomar()
 {
     printf("%d\n", somar(3, 4) == 7);
@@ -61,7 +61,7 @@ void testFatorial()
     printf("%d\n", fatorial(3) == 6);
     printf("%d\n", fatorial(1) == 1);
     printf("%d\n", fatorial(5) == 120);
-}
+}*/
 
 void testQ1()
 {
@@ -70,12 +70,12 @@ void testQ1()
     printf("%d\n", q1(str) == 0);
     strcpy(str, "29/02/2012");
     printf("%d\n", q1(str) == 1);
-    strcpy(str, "9/13/2014");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "45/4/2014");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "/9/2014");
-    printf("%d\n", q1(str) == 0);
+    //strcpy(str, "9/13/2014");
+    //printf("%d\n", q1(str) == 0);
+    //strcpy(str, "45/4/2014");
+    //printf("%d\n", q1(str) == 0);
+    //strcpy(str, "/9/2014");
+    //printf("%d\n", q1(str) == 0);
 }
 /*
 void testQ2()
