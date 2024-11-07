@@ -236,13 +236,14 @@ DataQuebrada quebraData(char data[]){
 		sDia[i] = '\0';  // coloca o barra zero no final
 		for (i = 0; sDia[i] != '\0'; i++){
            if((sDia >= 'a' && sDia <= 'z') || (sDia >= 'A' && sDia <= 'Z')){
-                dq.valido = 1;
+                dq.valido = 0;
+                return dq;
            }
 		}
 	}else {
-		dq.valido = 0;
-    return dq;
-  }
+		dq.valido = 1;
+        return dq;
+    }
 
 
 	int j = i + 1; //anda 1 cada para pular a barra
@@ -255,9 +256,15 @@ DataQuebrada quebraData(char data[]){
 
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sMes[i] = '\0';  // coloca o barra zero no final
+		for (i = 0; sDia[i] != '\0'; i++){
+           if((sMes >= 'a' && sMes <= 'z') || (sMes >= 'A' && sMes <= 'Z')){
+                dq.valido = 1;
+                return dq;
+           }
+		}
 	}else {
 		dq.valido = 0;
-    return dq;
+        return dq;
   }
 
 
