@@ -278,6 +278,12 @@ DataQuebrada quebraData(char data[]){
 
 	if(i == 2 || i == 4){ // testa se tem 2 ou 4 digitos
 		sAno[i] = '\0';  // coloca o barra zero no final
+		for (i = 0; sDia[i] != '\0'; i++){
+           if((sAno >= 'a' && sAno <= 'z') || (sAno >= 'A' && sAno <= 'Z')){
+                dq.valido = 0;
+                return dq;
+           }
+		}
 	}else {
 		dq.valido = 0;
     return dq;
