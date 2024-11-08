@@ -66,7 +66,7 @@ void testFatorial()
 void testQ1()
 {
     char str[11];
-    strcpy(str, "29/02/2015");
+    strcpy(str, "mm/02/2015");
     printf("%d\n", q1(str) == 0); //tem que retornar 0
     strcpy(str, "29/02/2012"); //tem que retornar 1
     printf("%d\n", q1(str) == 1);

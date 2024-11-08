@@ -235,7 +235,7 @@ DataQuebrada quebraData(char data[]){
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sDia[i] = '\0';  // coloca o barra zero no final
 		for (i = 0; sDia[i] != '\0'; i++){
-           if((sDia >= 'a' && sDia <= 'z') || (sDia >= 'A' && sDia <= 'Z')){
+           if((sDia[i] >= 'a' && sDia[i] <= 'z') || (sDia[i] >= 'A' && sDia[i] <= 'Z')){
                 dq.valido = 0;
                 return dq;
            }
@@ -256,14 +256,14 @@ DataQuebrada quebraData(char data[]){
 
 	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
 		sMes[i] = '\0';  // coloca o barra zero no final
-		for (i = 0; sDia[i] != '\0'; i++){
-           if((sMes >= 'a' && sMes <= 'z') || (sMes >= 'A' && sMes <= 'Z')){
-                dq.valido = 1;
+		for (i = 0; sMes[i] != '\0'; i++){
+           if((sMes[i] >= 'a' && sMes[i] <= 'z') || (sMes[i] >= 'A' && sMes[i] <= 'Z')){
+                dq.valido = 0;
                 return dq;
            }
 		}
 	}else {
-		dq.valido = 0;
+		dq.valido = 1;
         return dq;
   }
 
@@ -278,16 +278,20 @@ DataQuebrada quebraData(char data[]){
 
 	if(i == 2 || i == 4){ // testa se tem 2 ou 4 digitos
 		sAno[i] = '\0';  // coloca o barra zero no final
-		for (i = 0; sDia[i] != '\0'; i++){
-           if((sAno >= 'a' && sAno <= 'z') || (sAno >= 'A' && sAno <= 'Z')){
+		for (i = 0; sAno[i] != '\0'; i++){
+           if((sAno[i] >= 'a' && sAno[i] <= 'z') || (sAno[i] >= 'A' && sAno[i] <= 'Z')){
+                dq.valido = 0;
+                return dq;
+           }else if (){
                 dq.valido = 0;
                 return dq;
            }
 		}
 	}else {
-		dq.valido = 0;
+		dq.valido = 1;
     return dq;
   }
+    printf("data: %s", sDia);
 
   dq.iDia = atoi(sDia);
   dq.iMes = atoi(sMes);
