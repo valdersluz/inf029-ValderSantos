@@ -35,8 +35,8 @@ int main()
 {
     //testSomar();
     //testFatorial();
-    testQ1();
-    //testQ2();
+    //testQ1();
+    testQ2();
     /*testQ3();
     testQ4();
     testQ5();
@@ -66,18 +66,28 @@ void testFatorial()
 void testQ1()
 {
     char str[11];
-    strcpy(str, "mm/02/2015");
+    strcpy(str, "29/02/2015");
     printf("%d\n", q1(str) == 0); //tem que retornar 0
     strcpy(str, "29/02/2012"); //tem que retornar 1
     printf("%d\n", q1(str) == 1);
-    //strcpy(str, "9/13/2014");
-    //printf("%d\n", q1(str) == 0);
-    //strcpy(str, "45/4/2014");
-    //printf("%d\n", q1(str) == 0);
-    //strcpy(str, "/9/2014");
-    //printf("%d\n", q1(str) == 0);
+    strcpy(str, "9/13/2014");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "45/4/2014");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "/9/2014");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "9/ /2015");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "20/9/ ");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "-12/2/2020");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "13/-3/2020");
+    printf("%d\n", q1(str) == 0);
+    strcpy(str, "12/8/-2020");
+    printf("%d\n", q1(str) == 0);
 }
-/*
+
 void testQ2()
 {
     char datainicial[11], datafinal[11];
@@ -130,7 +140,7 @@ void testQ2()
     printf("%d\n", dma.qtdMeses == 1);
     printf("%d\n", dma.qtdAnos == 0);
 }
-
+/*
 void testQ3()
 {
     char str[250];

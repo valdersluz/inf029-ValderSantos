@@ -90,22 +90,109 @@ int teste(int a)
     Não utilizar funções próprias de string (ex: strtok)
     pode utilizar strlen para pegar o tamanho da string
  */
+int bissexto(int ano){
+    if((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0)){
+        return 2; //eh bissexto
+    } else {
+        return 1; //nao eh
+    }
+}
+
+/*
 int q1(char data[])
 {
     DataQuebrada dq = quebraData(data);
-    int datavalida = 1;
+    int datavalida;
 
     //quebrar a string data em strings sDia, sMes, sAno
 
+    if (dq.valido == 0){
+        datavalida = 0;
+    }
 
-    //printf("%s\n", data);
+
+        int aux = bissexto(dq.iAno);
+
+        switch(aux) {
+        case 1: {
+            // Não é bissexto
+            switch(dq.iMes) {
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    if((dq.iDia > 0) && (dq.iDia <= 31)) {
+                        datavalida = 1;
+                    } else {
+                        datavalida = 0;
+                    }
+                    break;
+
+                case 4: case 6: case 9: case 11:
+                    if((dq.iDia > 0) && (dq.iDia <= 30)) {
+                        datavalida = 1;
+                    } else {
+                        datavalida = 0;
+                    }
+                    break;
+
+                case 2:
+                    if((dq.iDia > 0) && (dq.iDia <= 28)) {
+                        datavalida = 1;
+                    } else {
+                        datavalida = 0;
+                    }
+                    break;
+
+                default:
+                    datavalida = 0;
+                    break;
+            }
+            break;
+        }
+
+        case 2: {
+            // É bissexto
+            switch(dq.iMes) {
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    if((dq.iDia > 0) && (dq.iDia <= 31)) {
+                        datavalida = 1;
+                    } else {
+                        datavalida = 0;
+                    }
+                    break;
+
+                case 4: case 6: case 9: case 11:
+                    if((dq.iDia > 0) && (dq.iDia <= 30)) {
+                        datavalida = 1;
+                    } else {
+                        datavalida = 0;
+                    }
+                    break;
+
+                case 2:
+                    if((dq.iDia > 0) && (dq.iDia <= 29)) {
+                        datavalida = 1;
+                    } else {
+                        datavalida = 0;
+                    }
+                    break;
+
+                default:
+                    datavalida = 0;
+                    break;
+            }
+            break;
+        }
+
+        default:
+            datavalida = 0;
+            break;
+    }
 
     if (datavalida)
         return 1;
     else
         return 0;
 }
-
+*/
 
 
 /*
@@ -221,83 +308,91 @@ int q6(int numerobase, int numerobusca)
 
 
 
-
 DataQuebrada quebraData(char data[]){
   DataQuebrada dq;
     char sDia[3];
 	char sMes[3];
 	char sAno[5];
 	int i;
+	/*
+	devo validar
+	*/
 
-	for (i = 0; data[i] != '/'; i++){
-		sDia[i] = data[i];
-	}
-	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
-		sDia[i] = '\0';  // coloca o barra zero no final
-		for (i = 0; sDia[i] != '\0'; i++){
-           if((sDia[i] >= 'a' && sDia[i] <= 'z') || (sDia[i] >= 'A' && sDia[i] <= 'Z')){
+        for (i = 0; data[i] != '/'; i++){
+            sDia[i] = data[i];
+            if(sDia[i] == '-' || sDia[i] == ' '){
                 dq.valido = 0;
                 return dq;
-           }
-		}
-	}else {
-		dq.valido = 1;
-        return dq;
-    }
+            }
+        }
+        if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
+            sDia[i] = '\0';  // coloca o barra zero no final
+
+            for (i = 0; sDia[i] != '\0'; i++){
+               if((sDia[i] >= 'a' && sDia[i] <= 'z') || (sDia[i] >= 'A' && sDia[i] <= 'Z')){
+                    dq.valido = 0;
+                    return dq;
+               }
+            }
+        }else {
+            dq.valido = 1;
+        }
 
 
-	int j = i + 1; //anda 1 cada para pular a barra
-	i = 0;
+        int j = i + 1; //anda 1 cada para pular a barra
+        i = 0;
 
-	for (; data[j] != '/'; j++){
-		sMes[i] = data[j];
-		i++;
-	}
-
-	if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
-		sMes[i] = '\0';  // coloca o barra zero no final
-		for (i = 0; sMes[i] != '\0'; i++){
-           if((sMes[i] >= 'a' && sMes[i] <= 'z') || (sMes[i] >= 'A' && sMes[i] <= 'Z')){
+        for (; data[j] != '/'; j++){
+            if(sMes[i] == '-' || sMes[i] == ' '){
                 dq.valido = 0;
                 return dq;
-           }
-		}
-	}else {
-		dq.valido = 1;
-        return dq;
-  }
+            }
+            sMes[i] = data[j];
+            i++;
+        }
+
+        if(i == 1 || i == 2){ // testa se tem 1 ou dois digitos
+            sMes[i] = '\0';  // coloca o barra zero no final
+            for (i = 0; sMes[i] != '\0'; i++){
+               if((sMes[i] >= 'a' && sMes[i] <= 'z') || (sMes[i] >= 'A' && sMes[i] <= 'Z')){
+                    dq.valido = 0;
+                    return dq;
+               }
+            }
+        }else {
+            dq.valido = 1;
+        }
 
 
-	j = j + 1; //anda 1 cada para pular a barra
-	i = 0;
+        j = j + 1; //anda 1 cada para pular a barra
+        i = 0;
 
-	for(; data[j] != '\0'; j++){
-	 	sAno[i] = data[j];
-	 	i++;
-	}
-
-	if(i == 2 || i == 4){ // testa se tem 2 ou 4 digitos
-		sAno[i] = '\0';  // coloca o barra zero no final
-		for (i = 0; sAno[i] != '\0'; i++){
-           if((sAno[i] >= 'a' && sAno[i] <= 'z') || (sAno[i] >= 'A' && sAno[i] <= 'Z')){
+        for(; data[j] != '\0'; j++){
+            if(sAno[i] == '-' || sAno[i] == ' '){
                 dq.valido = 0;
                 return dq;
-           }else if (){
-                dq.valido = 0;
-                return dq;
-           }
-		}
-	}else {
-		dq.valido = 1;
-    return dq;
-  }
-    printf("data: %s", sDia);
+            }
+            sAno[i] = data[j];
+            i++;
+        }
 
-  dq.iDia = atoi(sDia);
-  dq.iMes = atoi(sMes);
-  dq.iAno = atoi(sAno);
+        if(i == 2 || i == 4){ // testa se tem 2 ou 4 digitos
+            sAno[i] = '\0';  // coloca o barra zero no final
+            for (i = 0; sAno[i] != '\0'; i++){
+               if((sAno[i] >= 'a' && sAno[i] <= 'z') || (sAno[i] >= 'A' && sAno[i] <= 'Z')){
+                    dq.valido = 0;
+                    return dq;
+               }
+            }
+        }else {
+            dq.valido = 1;
+      }
 
-	dq.valido = 1;
+      dq.iDia = atoi(sDia);
+      dq.iMes = atoi(sMes);
+      dq.iAno = atoi(sAno);
+
+	  dq.valido = 1;
 
   return dq;
 }
