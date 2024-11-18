@@ -193,7 +193,14 @@ int q1(char data[])
         return 0;
 }
 
-
+int diasMes(int mes, int ano){
+    if(mes == 2){
+        return (bissexto(ano) == 2) ? 29 : 28;
+    } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11){
+        return 30;
+    }
+    return 31;
+}
 
 /*
  Q2 = diferença entre duas datas
@@ -244,8 +251,76 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
         }
 
       //calcule a distancia entre as datas
-      int aux = bissexto(dqinicial.iAno);
 
+      dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+      dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+      dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+
+      bissexto(dqinicial.iAno);
+      bissexto(dqfinal.iAno);
+
+      if( bissexto(dqinicial.iAno) == 2){
+        if(dqinicial.iMes >= 2){
+        printf("\ndata inicial: %d\n", dqinicial.iMes);
+            dma.qtdDias = dma.qtdDias + 1;
+        }
+      }
+
+      if( bissexto(dqfinal.iAno) == 2){
+        if(dqfinal.iMes > 2){
+            dma.qtdDias = dma.qtdDias + 1;
+        }
+      }
+      //if( ( bissexto(dqinicial.iAno) == 2) && ( bissexto(dqfinal.iAno) == 2)){
+
+      //}
+
+      if(dma.qtdDias < 0){
+        dma.qtdDias = dma.qtdDias + (diasMes(dqinicial.iMes, dqinicial.iAno));
+        dma.qtdMeses = (dma.qtdMeses - 1);
+      }
+
+      if(dma.qtdMeses < 0){
+        dma.qtdMeses = (dma.qtdMeses + 12);
+        dma.qtdAnos = dma.qtdAnos - 1;
+      }
+     /*
+      if(bissexto(dqinicial.iAno) && (dqinicial.iMes) == 2){
+
+      }
+
+      if(bissexto(dqfinal.iAno) == 2){
+
+      }
+
+      if((bissexto(dqinicial.iAno) == 2) && (bissexto(dqfinal.iAno) == 2)){
+
+      }
+
+        // Ajusta os dias se a data inicial ou final cai em fevereiro e envolve um ano bissexto
+        if ((dqinicial.iMes == 2 && dqinicial.iDia >= 27) || (dqfinal.iMes == 2 && dqfinal.iDia >= 27)) {
+            int anoBissextoInicial = (bissexto(dqinicial.iAno) == 2);
+            int anoBissextoFinal = (bissexto(dqfinal.iAno) == 2);
+
+            if (anoBissextoInicial && dqinicial.iMes == 2 && dqinicial.iDia <= 28 &&
+                (dqfinal.iAno > dqinicial.iAno || dqfinal.iMes > 2)) {
+                // Adiciona um dia para 29 de fevereiro se o ano inicial é bissexto e a data final passa de fevereiro
+                dma.qtdDias += 1;
+            }
+
+            if (anoBissextoFinal && dqfinal.iMes == 2 && dqfinal.iDia >= 29 &&
+                (dqinicial.iAno < dqfinal.iAno || dqinicial.iMes < 2)) {
+                // Adiciona um dia para 29 de fevereiro se o ano final é bissexto e a data inicial é antes de março
+                dma.qtdDias += 1;
+            }
+        }
+      */
+
+
+
+
+
+/*
       switch(aux){
             case 1:{
                 //não bissexto
@@ -256,8 +331,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
                         dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
 
-                        printf("caso 1: %d", dma.qtdAnos);
-
                         if(dma.qtdDias < 0){
                             dma.qtdDias = (dma.qtdDias + 31);
                             dma.qtdMeses = (dma.qtdMeses - 1);
@@ -266,7 +339,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         if(dma.qtdMeses < 0){
                             dma.qtdMeses = (dma.qtdMeses + 12);
                             dma.qtdAnos = dma.qtdAnos - 1;
-                            printf("caso 2: %d", dma.qtdAnos);
                         }
 
                         break;
@@ -284,7 +356,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         if(dma.qtdMeses < 0){
                             dma.qtdMeses = (dma.qtdMeses + 12);
                             dma.qtdAnos = dma.qtdAnos - 1;
-                            printf("caso 3: %d", dma.qtdAnos);
                         }
                         break;
                     case 2:
@@ -292,7 +363,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
                         dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
                         dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-                        printf("caso 4: %d", dma.qtdAnos);
 
                         if(dma.qtdDias < 0){
                             dma.qtdDias = (dma.qtdDias + 28);
@@ -302,7 +372,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         if(dma.qtdMeses < 0){
                             dma.qtdMeses = (dma.qtdMeses + 12);
                             dma.qtdAnos = (dma.qtdAnos - 1);
-                            printf("caso 5: %d", dma.qtdAnos);
                         }
                         break;
                 }
@@ -317,7 +386,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
                         dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
                         dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-                        printf("caso 6: %d", dma.qtdAnos);
 
                         if(dma.qtdDias < 0){
                             dma.qtdDias = (dma.qtdDias + 31);
@@ -327,7 +395,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         if(dma.qtdMeses < 0){
                             dma.qtdMeses = (dma.qtdMeses + 12);
                             dma.qtdAnos = (dma.qtdAnos - 1);
-                            printf("caso 7: %d", dma.qtdAnos);
                         }
 
                         break;
@@ -336,7 +403,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
                         dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
                         dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-                        printf("caso 8: %d", dma.qtdAnos);
 
                         if(dma.qtdDias < 0){
                             dma.qtdDias = (dma.qtdDias + 30);
@@ -346,7 +412,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         if(dma.qtdMeses < 0){
                             dma.qtdMeses = (dma.qtdMeses + 12);
                             dma.qtdAnos = dma.qtdAnos - 1;
-                            printf("caso 9: %d", dma.qtdAnos);
                         }
                         break;
                     case 2:
@@ -354,17 +419,20 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                         dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
                         dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
                         dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-                        printf("caso 10: %d", dma.qtdAnos);
 
                         if(dma.qtdDias < 0){
-                            dma.qtdDias = (dma.qtdDias + 28);
+                            dma.qtdDias = (dma.qtdDias + 29);
                             dma.qtdMeses = (dma.qtdMeses - 1);
                         }
 
                         if(dma.qtdMeses < 0){
                             dma.qtdMeses = (dma.qtdMeses + 12);
                             dma.qtdAnos = dma.qtdAnos - 1;
-                            printf("caso 11: %d", dma.qtdAnos);
+                        }
+                        /*if( bissexto(dma.qtdAnos) == 2){
+                            dma.qtdDias = ((dqfinal.iDia + 1) - dqinicial.iDia);
+                            dma.qtdMeses = (dma.qtdMeses + 12);
+                            dma.qtdAnos = dma.qtdAnos - 1;
                         }
                         break;
                 }
@@ -372,14 +440,14 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
             }
       }
 
-
+*/
 
 /*
       dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
       dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
       dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
 */
-printf("%d/%d/%d", dma.qtdDias, dma.qtdMeses, dma.qtdAnos);
+      //printf("%d/%d/%d", dma.qtdDias, dma.qtdMeses, dma.qtdAnos);
       //se tudo der certo
       dma.retorno = 1;
       return dma;

@@ -140,6 +140,85 @@ void testQ2()
     printf("%d\n", dma.qtdMeses == 1);
     printf("%d\n", dma.qtdAnos == 0);
 
+
+    //teste 4
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"06/06/2017");
+    strcpy(datafinal,"05/07/2018");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 29);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    //teste 5
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"26/07/2017");
+    strcpy(datafinal,"25/08/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 30);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    //teste 6
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"26/06/2017");
+    strcpy(datafinal,"26/07/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 0);
+    printf("%d\n",dma.qtdMeses == 1);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    //teste 8
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"27/02/2016");
+    strcpy(datafinal,"03/03/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("[%d]\n[%d]\n",dma.qtdDias == 4, dma.qtdDias);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    //teste 9
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"27/02/2015");
+    strcpy(datafinal,"03/03/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("[%d]\n[%d]\n",dma.qtdDias == 5, dma.qtdDias);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    //teste 10
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"28/01/2016");
+    strcpy(datafinal,"29/02/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 1);
+    printf("%d\n",dma.qtdMeses == 1);
+    printf("%d\n",dma.qtdAnos == 0);
+
 }
 /*
 void testQ3()
