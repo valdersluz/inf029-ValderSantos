@@ -98,7 +98,7 @@ int bissexto(int ano){
     }
 }
 
-/*
+
 int q1(char data[])
 {
     DataQuebrada dq = quebraData(data);
@@ -192,7 +192,7 @@ int q1(char data[])
     else
         return 0;
 }
-*/
+
 
 
 /*
@@ -209,11 +209,15 @@ int q1(char data[])
     4 -> datainicial > datafinal
     Caso o cálculo esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos com os valores correspondentes.
  */
+
+
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
 
     //calcule os dados e armazene nas três variáveis a seguir
     DiasMesesAnos dma;
+    DataQuebrada dqinicial = quebraData(datainicial);
+    DataQuebrada dqfinal = quebraData(datafinal);
 
     if (q1(datainicial) == 0){
       dma.retorno = 2;
@@ -223,10 +227,159 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       return dma;
     }else{
       //verifique se a data final não é menor que a data inicial
+      //a lógica para saber se data inicial  maior do que data final é aqui mesmo
+        if(dqinicial.iAno > dqfinal.iAno){
+            dma.retorno = 4;
+            return dma;
+        }else if (dqinicial.iAno == dqfinal.iAno){
+            if (dqinicial.iMes > dqfinal.iMes){
+                dma.retorno = 4;
+                return dma;
+            }else if(dqinicial.iMes == dqfinal.iMes){
+                if(dqinicial.iDia > dqfinal.iDia){
+                    dma.retorno = 4;
+                    return dma;
+                }
+            }
+        }
 
       //calcule a distancia entre as datas
+      int aux = bissexto(dqinicial.iAno);
+
+      switch(aux){
+            case 1:{
+                //não bissexto
+                switch(dqinicial.iMes){
+                    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                        //calcular com a nova lógica 31
+                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+
+                        printf("caso 1: %d", dma.qtdAnos);
+
+                        if(dma.qtdDias < 0){
+                            dma.qtdDias = (dma.qtdDias + 31);
+                            dma.qtdMeses = (dma.qtdMeses - 1);
+                        }
+
+                        if(dma.qtdMeses < 0){
+                            dma.qtdMeses = (dma.qtdMeses + 12);
+                            dma.qtdAnos = dma.qtdAnos - 1;
+                            printf("caso 2: %d", dma.qtdAnos);
+                        }
+
+                        break;
+                    case 4: case 6: case 9: case 11:
+                        //calcular com a logica 30
+                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+
+                        if(dma.qtdDias < 0){
+                            dma.qtdDias = (dma.qtdDias + 30);
+                            dma.qtdMeses = (dma.qtdMeses - 1);
+                        }
+
+                        if(dma.qtdMeses < 0){
+                            dma.qtdMeses = (dma.qtdMeses + 12);
+                            dma.qtdAnos = dma.qtdAnos - 1;
+                            printf("caso 3: %d", dma.qtdAnos);
+                        }
+                        break;
+                    case 2:
+                        //logica com 28
+                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+                        printf("caso 4: %d", dma.qtdAnos);
+
+                        if(dma.qtdDias < 0){
+                            dma.qtdDias = (dma.qtdDias + 28);
+                            dma.qtdMeses = (dma.qtdMeses - 1);
+                        }
+
+                        if(dma.qtdMeses < 0){
+                            dma.qtdMeses = (dma.qtdMeses + 12);
+                            dma.qtdAnos = (dma.qtdAnos - 1);
+                            printf("caso 5: %d", dma.qtdAnos);
+                        }
+                        break;
+                }
+
+                break;
+            }
+            case 2:{
+                //é bissexto
+                switch(dqinicial.iMes){
+                    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                        //calcular com a nova lógica 31
+                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+                        printf("caso 6: %d", dma.qtdAnos);
+
+                        if(dma.qtdDias < 0){
+                            dma.qtdDias = (dma.qtdDias + 31);
+                            dma.qtdMeses = (dma.qtdMeses - 1);
+                        }
+
+                        if(dma.qtdMeses < 0){
+                            dma.qtdMeses = (dma.qtdMeses + 12);
+                            dma.qtdAnos = (dma.qtdAnos - 1);
+                            printf("caso 7: %d", dma.qtdAnos);
+                        }
+
+                        break;
+                    case 4: case 6: case 9: case 11:
+                        //calcular com a logica 30
+                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+                        printf("caso 8: %d", dma.qtdAnos);
+
+                        if(dma.qtdDias < 0){
+                            dma.qtdDias = (dma.qtdDias + 30);
+                            dma.qtdMeses = (dma.qtdMeses - 1);
+                        }
+
+                        if(dma.qtdMeses < 0){
+                            dma.qtdMeses = (dma.qtdMeses + 12);
+                            dma.qtdAnos = dma.qtdAnos - 1;
+                            printf("caso 9: %d", dma.qtdAnos);
+                        }
+                        break;
+                    case 2:
+                        //logica com 29
+                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+                        printf("caso 10: %d", dma.qtdAnos);
+
+                        if(dma.qtdDias < 0){
+                            dma.qtdDias = (dma.qtdDias + 28);
+                            dma.qtdMeses = (dma.qtdMeses - 1);
+                        }
+
+                        if(dma.qtdMeses < 0){
+                            dma.qtdMeses = (dma.qtdMeses + 12);
+                            dma.qtdAnos = dma.qtdAnos - 1;
+                            printf("caso 11: %d", dma.qtdAnos);
+                        }
+                        break;
+                }
+                break;
+            }
+      }
 
 
+
+/*
+      dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
+      dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
+      dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
+*/
+printf("%d/%d/%d", dma.qtdDias, dma.qtdMeses, dma.qtdAnos);
       //se tudo der certo
       dma.retorno = 1;
       return dma;
