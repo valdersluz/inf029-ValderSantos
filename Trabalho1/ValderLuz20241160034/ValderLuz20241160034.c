@@ -256,24 +256,19 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
       dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
 
-      bissexto(dqinicial.iAno);
-      bissexto(dqfinal.iAno);
-
       if( bissexto(dqinicial.iAno) == 2){
-        if(dqinicial.iMes >= 2){
-        printf("\ndata inicial: %d\n", dqinicial.iMes);
-            dma.qtdDias = dma.qtdDias + 1;
-        }
+         if(dqinicial.iMes > 2 || (dqinicial.iMes == 2 && (dqinicial.iDia >= 27 && dqinicial.iDia <= 29) ) ){
+                dma.qtdDias = dma.qtdDias - 1;
+         }
       }
 
       if( bissexto(dqfinal.iAno) == 2){
-        if(dqfinal.iMes > 2){
-            dma.qtdDias = dma.qtdDias + 1;
-        }
+         if( (dma.qtdDias == 0) && (dma.qtdMeses == 0) && (dma.qtdAnos == 1) ){
+                dma.qtdDias = dma.qtdDias;
+         } else if  (dqfinal.iMes > 2 || (dqfinal.iMes == 2 && dqfinal.iDia <= 28 ) ){
+                dma.qtdDias = dma.qtdDias + 1;
+         }
       }
-      //if( ( bissexto(dqinicial.iAno) == 2) && ( bissexto(dqfinal.iAno) == 2)){
-
-      //}
 
       if(dma.qtdDias < 0){
         dma.qtdDias = dma.qtdDias + (diasMes(dqinicial.iMes, dqinicial.iAno));
@@ -284,170 +279,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
         dma.qtdMeses = (dma.qtdMeses + 12);
         dma.qtdAnos = dma.qtdAnos - 1;
       }
-     /*
-      if(bissexto(dqinicial.iAno) && (dqinicial.iMes) == 2){
 
-      }
-
-      if(bissexto(dqfinal.iAno) == 2){
-
-      }
-
-      if((bissexto(dqinicial.iAno) == 2) && (bissexto(dqfinal.iAno) == 2)){
-
-      }
-
-        // Ajusta os dias se a data inicial ou final cai em fevereiro e envolve um ano bissexto
-        if ((dqinicial.iMes == 2 && dqinicial.iDia >= 27) || (dqfinal.iMes == 2 && dqfinal.iDia >= 27)) {
-            int anoBissextoInicial = (bissexto(dqinicial.iAno) == 2);
-            int anoBissextoFinal = (bissexto(dqfinal.iAno) == 2);
-
-            if (anoBissextoInicial && dqinicial.iMes == 2 && dqinicial.iDia <= 28 &&
-                (dqfinal.iAno > dqinicial.iAno || dqfinal.iMes > 2)) {
-                // Adiciona um dia para 29 de fevereiro se o ano inicial é bissexto e a data final passa de fevereiro
-                dma.qtdDias += 1;
-            }
-
-            if (anoBissextoFinal && dqfinal.iMes == 2 && dqfinal.iDia >= 29 &&
-                (dqinicial.iAno < dqfinal.iAno || dqinicial.iMes < 2)) {
-                // Adiciona um dia para 29 de fevereiro se o ano final é bissexto e a data inicial é antes de março
-                dma.qtdDias += 1;
-            }
-        }
-      */
-
-
-
-
-
-/*
-      switch(aux){
-            case 1:{
-                //não bissexto
-                switch(dqinicial.iMes){
-                    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                        //calcular com a nova lógica 31
-                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
-                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
-
-                        if(dma.qtdDias < 0){
-                            dma.qtdDias = (dma.qtdDias + 31);
-                            dma.qtdMeses = (dma.qtdMeses - 1);
-                        }
-
-                        if(dma.qtdMeses < 0){
-                            dma.qtdMeses = (dma.qtdMeses + 12);
-                            dma.qtdAnos = dma.qtdAnos - 1;
-                        }
-
-                        break;
-                    case 4: case 6: case 9: case 11:
-                        //calcular com a logica 30
-                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
-                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
-                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-
-                        if(dma.qtdDias < 0){
-                            dma.qtdDias = (dma.qtdDias + 30);
-                            dma.qtdMeses = (dma.qtdMeses - 1);
-                        }
-
-                        if(dma.qtdMeses < 0){
-                            dma.qtdMeses = (dma.qtdMeses + 12);
-                            dma.qtdAnos = dma.qtdAnos - 1;
-                        }
-                        break;
-                    case 2:
-                        //logica com 28
-                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
-                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
-                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-
-                        if(dma.qtdDias < 0){
-                            dma.qtdDias = (dma.qtdDias + 28);
-                            dma.qtdMeses = (dma.qtdMeses - 1);
-                        }
-
-                        if(dma.qtdMeses < 0){
-                            dma.qtdMeses = (dma.qtdMeses + 12);
-                            dma.qtdAnos = (dma.qtdAnos - 1);
-                        }
-                        break;
-                }
-
-                break;
-            }
-            case 2:{
-                //é bissexto
-                switch(dqinicial.iMes){
-                    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                        //calcular com a nova lógica 31
-                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
-                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
-                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-
-                        if(dma.qtdDias < 0){
-                            dma.qtdDias = (dma.qtdDias + 31);
-                            dma.qtdMeses = (dma.qtdMeses - 1);
-                        }
-
-                        if(dma.qtdMeses < 0){
-                            dma.qtdMeses = (dma.qtdMeses + 12);
-                            dma.qtdAnos = (dma.qtdAnos - 1);
-                        }
-
-                        break;
-                    case 4: case 6: case 9: case 11:
-                        //calcular com a logica 30
-                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
-                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
-                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-
-                        if(dma.qtdDias < 0){
-                            dma.qtdDias = (dma.qtdDias + 30);
-                            dma.qtdMeses = (dma.qtdMeses - 1);
-                        }
-
-                        if(dma.qtdMeses < 0){
-                            dma.qtdMeses = (dma.qtdMeses + 12);
-                            dma.qtdAnos = dma.qtdAnos - 1;
-                        }
-                        break;
-                    case 2:
-                        //logica com 29
-                        dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
-                        dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
-                        dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-
-                        if(dma.qtdDias < 0){
-                            dma.qtdDias = (dma.qtdDias + 29);
-                            dma.qtdMeses = (dma.qtdMeses - 1);
-                        }
-
-                        if(dma.qtdMeses < 0){
-                            dma.qtdMeses = (dma.qtdMeses + 12);
-                            dma.qtdAnos = dma.qtdAnos - 1;
-                        }
-                        /*if( bissexto(dma.qtdAnos) == 2){
-                            dma.qtdDias = ((dqfinal.iDia + 1) - dqinicial.iDia);
-                            dma.qtdMeses = (dma.qtdMeses + 12);
-                            dma.qtdAnos = dma.qtdAnos - 1;
-                        }
-                        break;
-                }
-                break;
-            }
-      }
-
-*/
-
-/*
-      dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
-      dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
-      dma.qtdAnos = (dqfinal.iAno - dqinicial.iAno);
-*/
-      //printf("%d/%d/%d", dma.qtdDias, dma.qtdMeses, dma.qtdAnos);
       //se tudo der certo
       dma.retorno = 1;
       return dma;

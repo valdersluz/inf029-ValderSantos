@@ -189,7 +189,7 @@ void testQ2()
     strcpy(datafinal,"03/03/2017");
     dma = q2(datainicial, datafinal);
     printf("%d\n",dma.retorno == 1);
-    printf("[%d]\n[%d]\n",dma.qtdDias == 4, dma.qtdDias);
+    printf("%d\n",dma.qtdDias == 4);
     printf("%d\n",dma.qtdMeses == 0);
     printf("%d\n",dma.qtdAnos == 1);
 
@@ -202,7 +202,7 @@ void testQ2()
     strcpy(datafinal,"03/03/2016");
     dma = q2(datainicial, datafinal);
     printf("%d\n",dma.retorno == 1);
-    printf("[%d]\n[%d]\n",dma.qtdDias == 5, dma.qtdDias);
+    printf("%d\n",dma.qtdDias == 5);
     printf("%d\n",dma.qtdMeses == 0);
     printf("%d\n",dma.qtdAnos == 1);
 
