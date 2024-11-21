@@ -37,9 +37,9 @@ int main()
     //testFatorial();
     //testQ1();
     //testQ2();
-    testQ3();
-    /*
+    //testQ3();
     testQ4();
+    /*
     testQ5();
     testQ6();*/
 }
@@ -242,7 +242,7 @@ void testQ3()
     printf("%d\n",q3(str, 'E', 1) == 2);
     printf("%d\n",q3(str, 'S', 1) == 0);
 }
-/*
+
 void testQ4()
 {
     char strTexto[250];
@@ -297,7 +297,7 @@ void testQ4()
     printf("%d\n",posicoes[6]==26);
     printf("%d\n",posicoes[7]==27);
 }
-
+/*
 void testQ5()
 {
     printf("%d\n", q5(345) == 543);

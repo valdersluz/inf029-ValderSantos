@@ -328,7 +328,10 @@ int q3(char *texto, char c, int isCaseSensitive)
     uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irá guardar as posições de início e fim de cada ocorrência da palavra (strBusca) no texto base (texto).
  @saida
     Um número n >= 0 correspondente a quantidade de ocorrências encontradas.
-    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente. Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, deve ser preenchido com o índice de fim da ocorrencias. Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como há uma ocorrência da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
+    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente.
+    Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, deve ser preenchido com o índice de fim da ocorrencias.
+    Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera".
+    Como há uma ocorrência da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
         posicoes[0] = 13;
         posicoes[1] = 16;
         Observe que o índice da posição no texto deve começar ser contado a partir de 1.
@@ -338,6 +341,34 @@ int q3(char *texto, char c, int isCaseSensitive)
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = -1;
+      char texto[100] = "áóôéRenatoêíÚûç";
+      int texto_int[100];
+      int texto_int2[100];
+      int i,j;
+
+
+      for (i = 0; texto[i] != '\0'; i++){
+        printf("%c : ", texto[i]);
+        printf("%d, %i\n", texto[i], texto[i+1]);
+
+        texto_int[i] = texto[i];
+        texto_int[i+1] = texto[i+1];
+      }
+/*
+      printf("Numeros \n");
+      for(j = 0; j < i ; j++){
+            printf("%i\n", texto_int[j]);
+      }
+
+      printf("copia \n");
+      int k = 0;
+      for(j = 0; j < i ; j++){
+            if (texto_int[j] != -61){
+                texto_int2[k] = texto_int[j];
+                k++;
+            }
+      }
+*/
 
     return qtdOcorrencias;
 }
