@@ -193,15 +193,6 @@ int q1(char data[])
         return 0;
 }
 
-int diasMes(int mes, int ano){
-    if(mes == 2){
-        return (bissexto(ano) == 2) ? 29 : 28;
-    } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11){
-        return 30;
-    }
-    return 31;
-}
-
 /*
  Q2 = diferença entre duas datas
  @objetivo
@@ -217,6 +208,14 @@ int diasMes(int mes, int ano){
     Caso o cálculo esteja correto, os atributos qtdDias, qtdMeses e qtdAnos devem ser preenchidos com os valores correspondentes.
  */
 
+ int diasMes(int mes, int ano){
+    if(mes == 2){
+        return (bissexto(ano) == 2) ? 29 : 28;
+    } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11){
+        return 30;
+    }
+    return 31;
+}
 
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
@@ -298,9 +297,25 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
  @saida
     Um número n >= 0.
  */
+
+
+
 int q3(char *texto, char c, int isCaseSensitive)
 {
-    int qtdOcorrencias = -1;
+    int qtdOcorrencias = 0;
+    int len = strlen(texto); // Calcula o tamanho da string
+
+    for (int i = 0; i < len; i++) {
+        if (isCaseSensitive) {
+            if (c == texto[i]) {
+                qtdOcorrencias = qtdOcorrencias + 1;
+            }
+        } else {
+            if (tolower(c) == tolower(texto[i])) {
+                qtdOcorrencias = qtdOcorrencias + 1;
+            }
+        }
+    }
 
     return qtdOcorrencias;
 }

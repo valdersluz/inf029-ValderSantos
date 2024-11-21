@@ -35,9 +35,10 @@ int main()
 {
     //testSomar();
     //testFatorial();
-    testQ1();
-    testQ2();
-    /*testQ3();
+    //testQ1();
+    //testQ2();
+    testQ3();
+    /*
     testQ4();
     testQ5();
     testQ6();*/
@@ -220,7 +221,7 @@ void testQ2()
     printf("%d\n",dma.qtdAnos == 0);
 
 }
-/*
+
 void testQ3()
 {
     char str[250];
@@ -230,8 +231,18 @@ void testQ3()
     printf("%d\n", q3(str, 'l', 1) == 0);
     printf("%d\n", q3(str, 'l', 0) == 1);
     printf("%d\n", q3(str, 'L', 0) == 1);
-}
 
+    strcpy(str,"Letícia, signifiCa fEliCIdADE");
+    printf("%d\n",q3(str, 'c', 0) == 3);
+    printf("%d\n",q3(str, 'C', 0) == 3);
+    printf("%d\n",q3(str, 'c', 1) == 1);
+    printf("%d\n",q3(str, 'C', 1) == 2);
+    printf("%d\n",q3(str, 'R', 0) == 0);
+    printf("%d\n",q3(str, 'e', 0) == 3);
+    printf("%d\n",q3(str, 'E', 1) == 2);
+    printf("%d\n",q3(str, 'S', 1) == 0);
+}
+/*
 void testQ4()
 {
     char strTexto[250];
@@ -263,6 +274,28 @@ void testQ4()
     printf("%d\n", posicoes[3] == 36);
     printf("%d\n", posicoes[4] == 52);
     printf("%d\n", posicoes[5] == 54);
+
+    for (i = 0; i<30; i++){
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto,"Programar é legal?");
+    strcpy(strBusca,"sim");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 0);
+
+    for (i = 0; i<30; i++){
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto,"maraaaavilha, meu prograaaama funcionou");
+    strcpy(strBusca,"aa");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 4);
+    printf("%d\n",posicoes[0]==4);
+    printf("%d\n",posicoes[1]==5);
+    printf("%d\n",posicoes[2]==6);
+    printf("%d\n",posicoes[3]==7);
+    printf("%d\n",posicoes[4]==24);
+    printf("%d\n",posicoes[5]==25);
+    printf("%d\n",posicoes[6]==26);
+    printf("%d\n",posicoes[7]==27);
 }
 
 void testQ5()
@@ -271,6 +304,12 @@ void testQ5()
     printf("%d\n", q5(78) == 87);
     printf("%d\n", q5(3) == 3);
     printf("%d\n", q5(5430) == 345);
+    printf("%d\n",q5(1000) == 1);
+    printf("%d\n",q5(0) == 0);
+    printf("%d\n",q5(707) == 707);
+    printf("%d\n",q5(80) == 8);
+    printf("%d\n",q5(8) == 8);
+    printf("%d\n",q5(1234) == 4321);
 }
 
 void testQ6()
@@ -279,5 +318,11 @@ void testQ6()
     printf("%d\n", q6(34567368, 4576) == 0);
     printf("%d\n", q6(3539343, 3) == 4);
     printf("%d\n", q6(3539343, 39) == 1);
+    printf("%d\n",q6(5444, 44) == 1);
+    printf("%d\n",q6(54444, 44) == 2);
+    printf("%d\n",q6(1234562354, 23) == 2);
+    printf("%d\n",q6(1234, 13) == 0);
+    printf("%d\n",q6(544444, 4) == 5);
+    printf("%d\n",q6(1234562354, 32) == 0);
 }
 //*/
