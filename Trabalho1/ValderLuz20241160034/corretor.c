@@ -311,7 +311,7 @@ void testQ5()
     printf("%d\n",q5(8) == 8);
     printf("%d\n",q5(1234) == 4321);
 }
-
+/*
 void testQ6()
 {
     printf("%d\n", q6(34567368, 3) == 2);

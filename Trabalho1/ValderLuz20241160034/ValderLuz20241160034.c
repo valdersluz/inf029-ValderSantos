@@ -340,13 +340,73 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
+/*
+    int qtdOcorrencias = 0;   // Contador de ocorrências
+    int i, j;                 // Índices para loops
+    int k = 0;                // Índice para o vetor `posicoes`
+    int match;                // Variável para verificar correspondência
+
+
+    for (i = 0; strTexto[i] != '\0'; i++) {
+        // Verifica se a substring a partir de i corresponde ao padrão strBusca
+        match = 1;  // Assume que há correspondência inicialmente
+        for (j = 0; strBusca[j] != '\0'; j++) {
+            if (strTexto[i + j] != strBusca[j]) {
+                match = 0; // Marca como não correspondente
+                break;     // Sai do loop interno
+            }
+        }
+
+        if (match) {
+            posicoes[k++] = i;                     // Posição inicial
+            posicoes[k++] = i + strlen(strBusca) - 1; // Posição final
+            qtdOcorrencias++;                      // Incrementa o contador
+            i += strlen(strBusca) - 1;             // Avança para depois da ocorrência encontrada
+        }
+        printf("%d,%d[%d,%d][%d,%d]\n", qtdOcorrencias, k, posicoes[0], posicoes[1], posicoes[2], posicoes[3]);
+    }
+*/
+
     int qtdOcorrencias = -1;
-      char texto[100] = "áóôéRenatoêíÚûç";
-      int texto_int[100];
-      int texto_int2[100];
-      int i,j;
+    int i, j, k, st;
+    int aux[50];
+    char temp[10];
+    for(i = 0; strTexto[i] != '\0'; i++){
+        //printf("%s\n", strTexto);
+        for(j = 0; strBusca[j] != '\0'; j++){
+            //printf("%s\n", strBusca);
+            /*
+            if(strBusca[j] <0){
+                j = strlen(strBusca);
+            }
+            */
+
+            if(strBusca[j] == strTexto[i] ){
+                t[st] = strBusca[j];
+                printf("{%d}\n", t);
+            }else{
+                t[0] = '\0';
+                printf("{{%d}}\n", t);
+            }
+
+            if(strBusca[j] == strTexto[i]){
+                if(strBusca[0] == strTexto[i] && (strlen(strBusca) - 1) == strTexto[i]){
+
+                    aux[k] = strTexto[i];
+                    printf("[[%d]]\n", aux[k]);
+                    aux[k+1] = strTexto[i];
+                    printf("[[[%d]]]\n", aux[k+1]);
+                }
+
+            }
+        }
+    }
+    for(i = 0; i < 50; i++){
+        printf("[%d]\n", aux[i]);
+    }
 
 
+/*
       for (i = 0; texto[i] != '\0'; i++){
         printf("%c : ", texto[i]);
         printf("%d, %i\n", texto[i], texto[i+1]);
@@ -354,7 +414,6 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
         texto_int[i] = texto[i];
         texto_int[i+1] = texto[i+1];
       }
-/*
       printf("Numeros \n");
       for(j = 0; j < i ; j++){
             printf("%i\n", texto_int[j]);
@@ -385,6 +444,16 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
 
 int q5(int num)
 {
+    char snum[10];
+    char aux[10];
+    int i, j;
+    sprintf(snum, "%d", num);
+
+    for(i = strlen(snum) - 1, j = 0; i >= 0; i--, j++){
+        aux[j] = snum[i];
+    }
+    aux[j] = '\0';
+    num = atoi(aux);
 
     return num;
 }
