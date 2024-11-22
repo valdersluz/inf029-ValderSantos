@@ -333,50 +333,41 @@ int q3(char *texto, char c, int isCaseSensitive)
         O retorno da função, n, nesse caso seria 1;
 
  */
+
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
     int qtdOcorrencias = -1;
-    int i, j = 0, k = 0, p = 0;
+    int i, k = 0, p = 0, m = 0, n = 0;
     char strReserva[250];
-    char a = 'á';
-    char b = 'é';
-    char c = 'í';
-    char d = 'ó';
-    char e = 'ú';
 
-    //printf("\n %s\n", strBusca);
-
-    for(j = 0; strReserva[j] != '\0'; j++){
-        strReserva[j] = strTexto[j];
-
-        if(strTexto[j] == -95){
-            strReserva[j] = 'a';
-        }elseif(strTexto[j] == -87){
-            strReserva[j] = 'e';
-        }elseif(strTexto[j] == -83){
-            strReserva[j] = 'i';
-        }elseif(strTexto[j] == -77){
-            strReserva[j] = 'o';
-        }elseif(strTexto[j] == -70){
-            strReserva[j] = 'u';
+    for(m = 0; strTexto[m] != '\0'; m++){
+        if(strTexto[m] == -61){
+            continue;
+        }else{
+            if(strTexto[m] == -95){
+                strReserva[n] = 'a';
+            }else if(strTexto[m] == -87){
+                strReserva[n] = 'e';
+            }else if(strTexto[m] == -83){
+                strReserva[n] = 'i';
+            }else if(strTexto[m] == -77){
+                strReserva[n] = 'o';
+            }else if(strTexto[m] == -70){
+                strReserva[n] = 'u';
+            }else if(strTexto[m] == -89){
+                strReserva[n] = 'c';
+            }else if(strTexto[m] == -93){
+                strReserva[n] = 'a';
+            }else{
+                strReserva[n] = strTexto[m];
+            }
+            n++;
         }
-
+        strReserva[n] = '\0';
     }
 
-    for(i = 0; strTexto[i] != '\0'; i++){
-        //printf("\n i::: %d === letra::: %c\n\n", i, strTexto[i]);
-
-        //if((unsigned char)strTexto[i] <= 127){
-            //printf("\n acento %d --- %d\n", strTexto[i], strTexto[i] < 0);
-            //continue;
-        //}
-
-        //printf("\npassou do if acento com continue\n\n");
-
-        if(strBusca[k] == strTexto[i]){
-
-            //printf("%s\n [%d], [%d], [strlen: %d]", strBusca, i, k, strlen(strBusca) - 1);
-
+    for(i = 0; strReserva[i] != '\0'; i++){
+        if(strBusca[k] == strReserva[i]){
             if(k == (strlen(strBusca) - 1)){
                 k = 0;
                 posicoes[p] = ((i + 1) - (strlen(strBusca) - 1) );
@@ -392,11 +383,6 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
             k = 0;
         }
     }
-        //printf("\n ocorrencias %d\n", qtdOcorrencias);
-
-        for(int a = 0; a < 30; a++){
-            //printf("\n%d --- %d | %d", a, posicoes[a], qtdOcorrencias + 1);
-        }
 
     return (qtdOcorrencias + 1);
 }
