@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include "ValderLuz20241160034.h" // Substitua pelo seu arquivo de header renomeado
 #include <stdlib.h>
+#include <ctype.h>
 
 DataQuebrada quebraData(char data[]);
 
@@ -103,8 +104,6 @@ int q1(char data[])
 {
     DataQuebrada dq = quebraData(data);
     int datavalida;
-
-    //quebrar a string data em strings sDia, sMes, sAno
 
     if (dq.valido == 0){
         datavalida = 0;
@@ -220,7 +219,7 @@ int q1(char data[])
 DiasMesesAnos q2(char datainicial[], char datafinal[])
 {
 
-    //calcule os dados e armazene nas três variáveis a seguir
+
     DiasMesesAnos dma;
     DataQuebrada dqinicial = quebraData(datainicial);
     DataQuebrada dqfinal = quebraData(datafinal);
@@ -232,8 +231,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       dma.retorno = 3;
       return dma;
     }else{
-      //verifique se a data final não é menor que a data inicial
-      //a lógica para saber se data inicial  maior do que data final é aqui mesmo
+
         if(dqinicial.iAno > dqfinal.iAno){
             dma.retorno = 4;
             return dma;
@@ -248,8 +246,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
                 }
             }
         }
-
-      //calcule a distancia entre as datas
 
       dma.qtdDias = (dqfinal.iDia - dqinicial.iDia);
       dma.qtdMeses = (dqfinal.iMes - dqinicial.iMes);
@@ -279,7 +275,6 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
         dma.qtdAnos = dma.qtdAnos - 1;
       }
 
-      //se tudo der certo
       dma.retorno = 1;
       return dma;
 
@@ -303,7 +298,7 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
 int q3(char *texto, char c, int isCaseSensitive)
 {
     int qtdOcorrencias = 0;
-    int len = strlen(texto); // Calcula o tamanho da string
+    int len = strlen(texto);
 
     for (int i = 0; i < len; i++) {
         if (isCaseSensitive) {
@@ -340,96 +335,70 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-/*
-    int qtdOcorrencias = 0;   // Contador de ocorrências
-    int i, j;                 // Índices para loops
-    int k = 0;                // Índice para o vetor `posicoes`
-    int match;                // Variável para verificar correspondência
-
-
-    for (i = 0; strTexto[i] != '\0'; i++) {
-        // Verifica se a substring a partir de i corresponde ao padrão strBusca
-        match = 1;  // Assume que há correspondência inicialmente
-        for (j = 0; strBusca[j] != '\0'; j++) {
-            if (strTexto[i + j] != strBusca[j]) {
-                match = 0; // Marca como não correspondente
-                break;     // Sai do loop interno
-            }
-        }
-
-        if (match) {
-            posicoes[k++] = i;                     // Posição inicial
-            posicoes[k++] = i + strlen(strBusca) - 1; // Posição final
-            qtdOcorrencias++;                      // Incrementa o contador
-            i += strlen(strBusca) - 1;             // Avança para depois da ocorrência encontrada
-        }
-        printf("%d,%d[%d,%d][%d,%d]\n", qtdOcorrencias, k, posicoes[0], posicoes[1], posicoes[2], posicoes[3]);
-    }
-*/
-
     int qtdOcorrencias = -1;
-    int i, j, k, st;
-    int aux[50];
-    char temp[10];
-    for(i = 0; strTexto[i] != '\0'; i++){
-        //printf("%s\n", strTexto);
-        for(j = 0; strBusca[j] != '\0'; j++){
-            //printf("%s\n", strBusca);
-            /*
-            if(strBusca[j] <0){
-                j = strlen(strBusca);
-            }
-            */
+    int i, j = 0, k = 0, p = 0;
+    char strReserva[250];
+    char a = 'á';
+    char b = 'é';
+    char c = 'í';
+    char d = 'ó';
+    char e = 'ú';
 
-            if(strBusca[j] == strTexto[i] ){
-                t[st] = strBusca[j];
-                printf("{%d}\n", t);
-            }else{
-                t[0] = '\0';
-                printf("{{%d}}\n", t);
-            }
+    //printf("\n %s\n", strBusca);
 
-            if(strBusca[j] == strTexto[i]){
-                if(strBusca[0] == strTexto[i] && (strlen(strBusca) - 1) == strTexto[i]){
+    for(j = 0; strReserva[j] != '\0'; j++){
+        strReserva[j] = strTexto[j];
 
-                    aux[k] = strTexto[i];
-                    printf("[[%d]]\n", aux[k]);
-                    aux[k+1] = strTexto[i];
-                    printf("[[[%d]]]\n", aux[k+1]);
-                }
-
-            }
+        if(strTexto[j] == -95){
+            strReserva[j] = 'a';
+        }elseif(strTexto[j] == -87){
+            strReserva[j] = 'e';
+        }elseif(strTexto[j] == -83){
+            strReserva[j] = 'i';
+        }elseif(strTexto[j] == -77){
+            strReserva[j] = 'o';
+        }elseif(strTexto[j] == -70){
+            strReserva[j] = 'u';
         }
-    }
-    for(i = 0; i < 50; i++){
-        printf("[%d]\n", aux[i]);
+
     }
 
+    for(i = 0; strTexto[i] != '\0'; i++){
+        //printf("\n i::: %d === letra::: %c\n\n", i, strTexto[i]);
 
-/*
-      for (i = 0; texto[i] != '\0'; i++){
-        printf("%c : ", texto[i]);
-        printf("%d, %i\n", texto[i], texto[i+1]);
+        //if((unsigned char)strTexto[i] <= 127){
+            //printf("\n acento %d --- %d\n", strTexto[i], strTexto[i] < 0);
+            //continue;
+        //}
 
-        texto_int[i] = texto[i];
-        texto_int[i+1] = texto[i+1];
-      }
-      printf("Numeros \n");
-      for(j = 0; j < i ; j++){
-            printf("%i\n", texto_int[j]);
-      }
+        //printf("\npassou do if acento com continue\n\n");
 
-      printf("copia \n");
-      int k = 0;
-      for(j = 0; j < i ; j++){
-            if (texto_int[j] != -61){
-                texto_int2[k] = texto_int[j];
+        if(strBusca[k] == strTexto[i]){
+
+            //printf("%s\n [%d], [%d], [strlen: %d]", strBusca, i, k, strlen(strBusca) - 1);
+
+            if(k == (strlen(strBusca) - 1)){
+                k = 0;
+                posicoes[p] = ((i + 1) - (strlen(strBusca) - 1) );
+                p++;
+                posicoes[p] = i + 1;
+                p++;
+
+                qtdOcorrencias = (qtdOcorrencias + 1);
+            }else{
                 k++;
             }
-      }
-*/
+        }else{
+            k = 0;
+        }
+    }
+        //printf("\n ocorrencias %d\n", qtdOcorrencias);
 
-    return qtdOcorrencias;
+        for(int a = 0; a < 30; a++){
+            //printf("\n%d --- %d | %d", a, posicoes[a], qtdOcorrencias + 1);
+        }
+
+    return (qtdOcorrencias + 1);
 }
 
 /*
@@ -470,7 +439,31 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+    int qtdOcorrencias = 0;
+    char snumerobase[15];
+    char snumerobusca[5];
+    int i, k = 0;
+
+    sprintf(snumerobase, "%d", numerobase);
+    sprintf(snumerobusca, "%d", numerobusca);
+
+    for(i = 0; snumerobase[i] != '\0'; i++){
+
+        if(snumerobusca[k] == snumerobase[i]){
+
+            if(k == (strlen(snumerobusca) - 1)){
+                k = 0;
+                qtdOcorrencias = (qtdOcorrencias + 1);
+            }else{
+                k++;
+            }
+        }else{
+            k = 0;
+        }
+    }
+
+
+
     return qtdOcorrencias;
 }
 

@@ -255,7 +255,7 @@ void testQ4()
     }
     strcpy(strTexto, "Laboratorio de programacao: para ratos de programação");
     strcpy(strBusca, "rato");
-    printf("%d\n", q4(strTexto, strBusca, posicoes) == 2);
+    printf("[%d]\n", q4(strTexto, strBusca, posicoes) == 2);
     printf("%d\n", posicoes[0] == 5);
     printf("%d\n", posicoes[1] == 8);
     printf("%d\n", posicoes[2] == 34);
@@ -267,7 +267,7 @@ void testQ4()
     }
     strcpy(strTexto, "Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas");
     strcpy(strBusca, "mui");
-    printf("%d\n", q4(strTexto, strBusca, posicoes) == 3);
+    printf("[%d]\n", q4(strTexto, strBusca, posicoes) == 3);
     printf("%d\n", posicoes[0] == 16);
     printf("%d\n", posicoes[1] == 18);
     printf("%d\n", posicoes[2] == 34);
@@ -280,14 +280,14 @@ void testQ4()
     }
     strcpy(strTexto,"Programar é legal?");
     strcpy(strBusca,"sim");
-    printf("%d\n",q4(strTexto, strBusca, posicoes) == 0);
+    printf("{%d}\n",q4(strTexto, strBusca, posicoes) == 0);
 
     for (i = 0; i<30; i++){
         posicoes[i] = -1;
     }
     strcpy(strTexto,"maraaaavilha, meu prograaaama funcionou");
     strcpy(strBusca,"aa");
-    printf("%d\n",q4(strTexto, strBusca, posicoes) == 4);
+    printf("[%d]\n",q4(strTexto, strBusca, posicoes) == 4);
     printf("%d\n",posicoes[0]==4);
     printf("%d\n",posicoes[1]==5);
     printf("%d\n",posicoes[2]==6);
@@ -311,7 +311,7 @@ void testQ5()
     printf("%d\n",q5(8) == 8);
     printf("%d\n",q5(1234) == 4321);
 }
-/*
+*/
 void testQ6()
 {
     printf("%d\n", q6(34567368, 3) == 2);
@@ -325,4 +325,4 @@ void testQ6()
     printf("%d\n",q6(544444, 4) == 5);
     printf("%d\n",q6(1234562354, 32) == 0);
 }
-//*/
+
