@@ -23,13 +23,13 @@
 
 
 //void testSomar();    //função utilizada para testes
-void testFatorial(); //função utilizada para testes
-//void testQ1();
-//void testQ2();
-//void testQ3();
-//void testQ4();
-//void testQ5();
-//void testQ6();
+//void testFatorial(); //função utilizada para testes
+void testQ1();
+void testQ2();
+void testQ3();
+void testQ4();
+void testQ5();
+void testQ6();
 
 int main()
 {
@@ -297,7 +297,7 @@ void testQ4()
     printf("%d\n",posicoes[6]==26);
     printf("%d\n",posicoes[7]==27);
 }
-/*
+
 void testQ5()
 {
     printf("%d\n", q5(345) == 543);
@@ -311,7 +311,7 @@ void testQ5()
     printf("%d\n",q5(8) == 8);
     printf("%d\n",q5(1234) == 4321);
 }
-*/
+
 void testQ6()
 {
     printf("%d\n", q6(34567368, 3) == 2);
