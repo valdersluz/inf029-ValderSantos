@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define TAM 10
 
-#include "EstruturaVetores.h"
+#include "ValderLuz20241160034.h"
 
 int* vetorPrincipal[TAM];
 
@@ -22,15 +22,40 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
 {
 
     int retorno = 0;
-    // a posicao pode já existir estrutura auxiliar
-    retorno = JA_TEM_ESTRUTURA_AUXILIAR;
-    // se posição é um valor válido {entre 1 e 10}
-    retorno = POSICAO_INVALIDA;
-    // o tamanho ser muito grande
-    retorno = SEM_ESPACO_DE_MEMORIA;
-    // o tamanho nao pode ser menor que 1
-    retorno = TAMANHO_INVALIDO;
+    posicao = posicao - 1;
+    /*
+    for (int i = 0; i < TAM; i++){
+        printf("o que tem no ponteiro de vetor: [%p]\n", vetorPrincipal[i]);
+    }
+    */
+    printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
+    if(vetorPrincipal[posicao] != NULL){
+        // a posicao pode já existir estrutura auxiliar
+        //printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
+        retorno = JA_TEM_ESTRUTURA_AUXILIAR;
+        return retorno;
+    }
+    if((posicao < 0) || (posicao >= TAM)){
+        // se posição é um valor válido {entre 1 e 10}
+        //printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
+        retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
+
+    if(tamanho < 1){
+        // o tamanho nao pode ser menor que 1
+        //printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
+        retorno = TAMANHO_INVALIDO;
+        return retorno;
+    }
+
     // deu tudo certo, crie
+    vetorPrincipal[posicao] = (int*) malloc(tamanho * sizeof(int));
+    if(vetorPrincipal[posicao] == NULL){
+        // o tamanho ser muito grande
+        retorno = SEM_ESPACO_DE_MEMORIA;
+        return retorno;
+    }
     retorno = SUCESSO;
 
     return retorno;
@@ -276,4 +301,10 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 
 void finalizar()
 {
+    for(int i = 0; i < TAM; i++){
+        if(vetorPrincipal[i] != NULL){
+            free(vetorPrincipal[i]);
+            vetorPrincipal[i] = NULL;
+        }
+    }
 }
