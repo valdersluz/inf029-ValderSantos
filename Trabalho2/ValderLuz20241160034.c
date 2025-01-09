@@ -23,32 +23,23 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
 
     int retorno = 0;
     posicao = posicao - 1;
-    /*
-    for (int i = 0; i < TAM; i++){
-        printf("o que tem no ponteiro de vetor: [%p]\n", vetorPrincipal[i]);
-    }
-    */
+
     printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
     if(vetorPrincipal[posicao] != NULL){
         // a posicao pode já existir estrutura auxiliar
-        //printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
         retorno = JA_TEM_ESTRUTURA_AUXILIAR;
         return retorno;
     }
     if((posicao < 0) || (posicao >= TAM)){
         // se posição é um valor válido {entre 1 e 10}
-        //printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
         retorno = POSICAO_INVALIDA;
         return retorno;
     }
-
     if(tamanho < 1){
         // o tamanho nao pode ser menor que 1
-        //printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
         retorno = TAMANHO_INVALIDO;
         return retorno;
     }
-
     // deu tudo certo, crie
     vetorPrincipal[posicao] = (int*) malloc(tamanho * sizeof(int));
     if(vetorPrincipal[posicao] == NULL){
@@ -76,6 +67,7 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     int existeEstruturaAuxiliar = 0;
     int temEspaco = 0;
     int posicao_invalida = 0;
+    posicao = posicao - 1;
 
     if (posicao_invalida)
         retorno = POSICAO_INVALIDA;
@@ -291,6 +283,9 @@ Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 
 void inicializar()
 {
+    for(int i = 0; i < TAM; i++){
+        vetorPrincipal[i] = NULL;
+    }
 }
 
 /*
