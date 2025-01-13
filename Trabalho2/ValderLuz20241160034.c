@@ -5,7 +5,29 @@
 
 #include "ValderLuz20241160034.h"
 
-int* vetorPrincipal[TAM];
+typedef struct vetPrincipal{
+    int *vetor;
+    int tamVetAux;
+    int posicao;
+}VetPrincipal;
+
+VetPrincipal *vetorPrincipal[TAM];
+
+
+/*
+Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
+
+*/
+
+void inicializar()
+{
+    for(int i = 0; i < TAM; i++){
+
+        vetorPrincipal[i] = NULL;
+
+    }
+
+}
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
@@ -24,15 +46,15 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     int retorno = 0;
     posicao = posicao - 1;
 
-    printf("posicao [%d], tamanho [%d]\n", posicao, tamanho);
-    if(vetorPrincipal[posicao] != NULL){
-        // a posicao pode já existir estrutura auxiliar
-        retorno = JA_TEM_ESTRUTURA_AUXILIAR;
-        return retorno;
-    }
     if((posicao < 0) || (posicao >= TAM)){
         // se posição é um valor válido {entre 1 e 10}
         retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
+
+    if(vetorPrincipal[posicao] != NULL){
+        // a posicao pode já existir estrutura auxiliar
+        retorno = JA_TEM_ESTRUTURA_AUXILIAR;
         return retorno;
     }
     if(tamanho < 1){
@@ -40,13 +62,34 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
         retorno = TAMANHO_INVALIDO;
         return retorno;
     }
+    /*
     // deu tudo certo, crie
-    vetorPrincipal[posicao] = (int*) malloc(tamanho * sizeof(int));
+    vetorPrincipal[posicao]->vetor = (int*) malloc(tamanho * sizeof(int));
+    vetorPrincipal.tamVetAux = tamanho;
     if(vetorPrincipal[posicao] == NULL){
         // o tamanho ser muito grande
         retorno = SEM_ESPACO_DE_MEMORIA;
         return retorno;
+    } */
+
+    // o tamanho ser muito grande
+    vetorPrincipal[posicao] = (VetPrincipal *)malloc(sizeof(VetPrincipal));
+    if (vetorPrincipal[posicao] == NULL) {
+        retorno = SEM_ESPACO_DE_MEMORIA;
+        return retorno;
     }
+
+    // deu tudo certo, crie
+    vetorPrincipal[posicao]->vetor = (int *)malloc(tamanho * sizeof(int));
+    if (vetorPrincipal[posicao]->vetor == NULL) {
+        free(vetorPrincipal[posicao]);
+        vetorPrincipal[posicao] = NULL;
+        return SEM_ESPACO_DE_MEMORIA;
+    }
+
+    vetorPrincipal[posicao]->tamVetAux = tamanho;
+    vetorPrincipal[posicao]->posicao = posicao;
+
     retorno = SUCESSO;
 
     return retorno;
@@ -67,28 +110,47 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     int existeEstruturaAuxiliar = 0;
     int temEspaco = 0;
     int posicao_invalida = 0;
+
+    //printf("posição: [%d]", posicao);
+    if((posicao <= 0) || (posicao > 10)){
+        posicao_invalida = 1;
+    }
+
     posicao = posicao - 1;
 
-    if (posicao_invalida)
+    if (posicao_invalida){
         retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
     else
     {
         // testar se existe a estrutura auxiliar
+        if(vetorPrincipal[posicao] != NULL){
+            existeEstruturaAuxiliar = 1;
+        }
         if (existeEstruturaAuxiliar)
         {
+            if(vetorPrincipal[posicao]->posicao < vetorPrincipal[posicao]->tamVetAux){
+                temEspaco = 1;
+            }
+
             if (temEspaco)
             {
                 //insere
+                vetorPrincipal[posicao]->vetor[vetorPrincipal[posicao]->posicao] = valor;
+                vetorPrincipal[posicao]->posicao++;
                 retorno = SUCESSO;
             }
             else
             {
                 retorno = SEM_ESPACO;
+                return retorno;
             }
         }
         else
         {
             retorno = SEM_ESTRUTURA_AUXILIAR;
+            return retorno;
         }
     }
 
@@ -276,17 +338,6 @@ void destruirListaEncadeadaComCabecote(No **inicio)
 {
 }
 
-/*
-Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
-
-*/
-
-void inicializar()
-{
-    for(int i = 0; i < TAM; i++){
-        vetorPrincipal[i] = NULL;
-    }
-}
 
 /*
 Objetivo: finaliza o programa. deve ser chamado ao final do programa
@@ -298,6 +349,7 @@ void finalizar()
 {
     for(int i = 0; i < TAM; i++){
         if(vetorPrincipal[i] != NULL){
+            free(vetorPrincipal[i]->vetor);
             free(vetorPrincipal[i]);
             vetorPrincipal[i] = NULL;
         }
