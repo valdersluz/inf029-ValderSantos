@@ -20,8 +20,8 @@ int main()
     inicializar();
     testeInserirSemNada();
     testeCriarEstrutura();
-    /*testeInserirComEstrutura();
-    testeExcluir();
+    testeInserirComEstrutura();
+    /*testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
@@ -66,7 +66,8 @@ void testeInserirComEstrutura()
     //###  int inserirNumeroEmEstrutura(int valor, int posicao); ###
     printf("%d\n", inserirNumeroEmEstrutura(2, 4) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, -2) == SUCESSO);
-    printf("%d\n", inserirNumeroEmEstrutura(2, 6) == SUCESSO);
+    printf("%d, [%d]\n", inserirNumeroEmEstrutura(2, 6) == SUCESSO, inserirNumeroEmEstrutura(2, 6));
+
     printf("%d\n", inserirNumeroEmEstrutura(2, 5) == SEM_ESPACO);
 }
 /*

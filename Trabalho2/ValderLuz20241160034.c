@@ -62,28 +62,24 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
         retorno = TAMANHO_INVALIDO;
         return retorno;
     }
-    /*
-    // deu tudo certo, crie
-    vetorPrincipal[posicao]->vetor = (int*) malloc(tamanho * sizeof(int));
-    vetorPrincipal.tamVetAux = tamanho;
-    if(vetorPrincipal[posicao] == NULL){
-        // o tamanho ser muito grande
-        retorno = SEM_ESPACO_DE_MEMORIA;
-        return retorno;
-    } */
 
-    // o tamanho ser muito grande
+
     vetorPrincipal[posicao] = (VetPrincipal *)malloc(sizeof(VetPrincipal));
     if (vetorPrincipal[posicao] == NULL) {
         retorno = SEM_ESPACO_DE_MEMORIA;
         return retorno;
     }
 
-    // deu tudo certo, crie
+
     vetorPrincipal[posicao]->vetor = (int *)malloc(tamanho * sizeof(int));
     if (vetorPrincipal[posicao]->vetor == NULL) {
         free(vetorPrincipal[posicao]);
         vetorPrincipal[posicao] = NULL;
+
+        for(int i = 0; i < vetorPrincipal[posicao]->tamVetAux; i++){
+
+        }
+
         return SEM_ESPACO_DE_MEMORIA;
     }
 
@@ -133,17 +129,32 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             if(vetorPrincipal[posicao]->posicao < vetorPrincipal[posicao]->tamVetAux){
                 temEspaco = 1;
             }
-
+                //printf("tem espaco[%d]\n", temEspaco);
             if (temEspaco)
             {
                 //insere
                 vetorPrincipal[posicao]->vetor[vetorPrincipal[posicao]->posicao] = valor;
                 vetorPrincipal[posicao]->posicao++;
+/*
+
+                for (int i = 0; i < TAM; i++) {
+                    if (vetorPrincipal[i] != NULL) { // Verifica se a estrutura auxiliar existe
+                        printf("Estrutura na posicao [%d]:\n", i + 1);
+                        for (int j = 0; j < vetorPrincipal[i]->posicao; j++) { // Percorre elementos armazenados
+                            printf("  vetor[%d] = %d\n", j, vetorPrincipal[i]->vetor[j]);
+                        }
+                    } else {
+                        printf("Estrutura na posicao [%d] eh nula ou nao inicializada.\n", i + 1);
+                    }
+                }*/
+
                 retorno = SUCESSO;
+                //printf("[%d]\n", retorno);
             }
             else
             {
                 retorno = SEM_ESPACO;
+                //printf("sem espaço [%d]\n", retorno);
                 return retorno;
             }
         }
@@ -170,6 +181,14 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
+/*
+    if(posicao < 1){
+
+    }
+
+
+
+    vetorPrincipal[posicao] */
     int retorno = SUCESSO;
     return retorno;
 }
