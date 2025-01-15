@@ -21,12 +21,12 @@ int main()
     testeInserirSemNada();
     testeCriarEstrutura();
     testeInserirComEstrutura();
-    /*testeExcluir();
+    testeExcluir();
     testeExcluirNumeroEspecifico();
     testeListar();
     testeRetornarTodosNumeros();
     testeMudarTamanhoEstrutura();
-    testeListaEncadeada();*/
+    testeListaEncadeada();
     finalizar();
 }
 int ligado = 1;
@@ -66,7 +66,7 @@ void testeInserirComEstrutura()
     //###  int inserirNumeroEmEstrutura(int valor, int posicao); ###
     printf("%d\n", inserirNumeroEmEstrutura(2, 4) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, -2) == SUCESSO);
-    printf("%d, [%d]\n", inserirNumeroEmEstrutura(2, 6) == SUCESSO, inserirNumeroEmEstrutura(2, 6));
+    printf("%d\n", inserirNumeroEmEstrutura(2, 6) == SUCESSO);
 
     printf("%d\n", inserirNumeroEmEstrutura(2, 5) == SEM_ESPACO);
 }

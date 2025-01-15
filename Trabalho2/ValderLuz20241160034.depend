@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1735767749 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho2/mainTeste.c
+1736977161 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho2/mainTeste.c
 	<stdio.h>
 	<stdlib.h>
 	"ValderLuz20241160034.h"
 
-1734375675 /home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho2/ValderLuz20241160034.h
+1735780402 /home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho2/ValderLuz20241160034.h
 
-1735767716 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho2/ValderLuz20241160034.c
+1736970401 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho2/ValderLuz20241160034.c
 	<stdio.h>
 	<stdlib.h>
 	"ValderLuz20241160034.h"
