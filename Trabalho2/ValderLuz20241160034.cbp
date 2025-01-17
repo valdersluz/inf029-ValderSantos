@@ -31,11 +31,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="cabecalho.h" />
-		<Unit filename="mainTeste.c">
+		<Unit filename="ValderLuz20241160034.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="valder.c">
+		<Unit filename="ValderLuz20241160034.h" />
+		<Unit filename="mainTeste.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions />
