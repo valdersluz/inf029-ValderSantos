@@ -106,7 +106,6 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     int temEspaco = 0;
     int posicao_invalida = 0;
 
-    //printf("posição: [%d]", posicao);
     if((posicao <= 0) || (posicao > 10)){
         posicao_invalida = 1;
     }
@@ -128,32 +127,19 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
             if(vetorPrincipal[posicao]->posicaoVetAux < vetorPrincipal[posicao]->tamVetAux){
                 temEspaco = 1;
             }
-                //printf("tem espaco[%d]\n", temEspaco);
+
             if (temEspaco)
             {
                 //insere
                 vetorPrincipal[posicao]->vetor[vetorPrincipal[posicao]->posicaoVetAux] = valor;
                 vetorPrincipal[posicao]->posicaoVetAux++;
-/*
-
-                for (int i = 0; i < TAM; i++) {
-                    if (vetorPrincipal[i] != NULL) { // Verifica se a estrutura auxiliar existe
-                        printf("Estrutura na posicao [%d]:\n", i + 1);
-                        for (int j = 0; j < vetorPrincipal[i]->posicao; j++) { // Percorre elementos armazenados
-                            printf("  vetor[%d] = %d\n", j, vetorPrincipal[i]->vetor[j]);
-                        }
-                    } else {
-                        printf("Estrutura na posicao [%d] eh nula ou nao inicializada.\n", i + 1);
-                    }
-                }*/
 
                 retorno = SUCESSO;
-                //printf("[%d]\n", retorno);
+                return retorno;
             }
             else
             {
                 retorno = SEM_ESPACO;
-                //printf("sem espaço [%d]\n", retorno);
                 return retorno;
             }
         }
@@ -218,17 +204,6 @@ int excluirNumeroDoFinaldaEstrutura(int posicao)
 
     retorno = SUCESSO;
     return retorno;
-
-/*
-    if(posicao < 1){
-
-    }
-
-
-
-    vetorPrincipal[posicao] */
-    //int retorno = SUCESSO;
-    //return retorno;
 }
 
 /*
@@ -378,9 +353,9 @@ Rertono (int)
 */
 int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 {
-    // int retorno = 0;
+    int retorno = 0;
 
-    int retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
+    retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
 
     if (retorno == SUCESSO) {
         VetPrincipal *estrutura = vetorPrincipal[posicao - 1];
@@ -389,43 +364,6 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 
     return retorno;
 
-    /*
-    int retorno = 0;
-
-    // Validação de posição
-    if (posicao <= 0 || posicao > TAM) {
-        retorno = POSICAO_INVALIDA;
-        return retorno;
-    }
-
-    // Ajustar para índice do vetor
-    posicao -= 1;
-
-    // Verificar se existe uma estrutura auxiliar na posição
-    if (vetorPrincipal[posicao] == NULL) {
-        retorno = SEM_ESTRUTURA_AUXILIAR;
-        return retorno;
-    }
-
-    VetPrincipal *estrutura = vetorPrincipal[posicao];
-
-    // Verificar se a estrutura auxiliar está vazia
-    if (estrutura->posicaoVetAux == 0) {
-        retorno = ESTRUTURA_AUXILIAR_VAZIA;
-        return retorno;
-    }
-
-    // Copiar os valores da estrutura auxiliar para vetorAux
-    for (int i = 0; i < estrutura->posicaoVetAux; i++) {
-        vetorAux[i] = estrutura->vetor[i];
-    }
-
-    // Ordenar os valores no vetorAux
-    ordenarVetor(vetorAux, estrutura->posicaoVetAux);
-
-    retorno = SUCESSO;
-    return retorno;
-    */
 }
 
 /*
@@ -438,8 +376,6 @@ Rertono (int)
 */
 int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
-    //int retorno = 0;
-    //return retorno;
 
     int retorno = 0;
     int indice = 0;
@@ -456,8 +392,10 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
 
     if (todasVazias) {
         retorno = TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+        return retorno;
     } else {
         retorno = SUCESSO;
+        return retorno;
     }
 
     return retorno;
@@ -473,10 +411,9 @@ Rertono (int)
 */
 int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
-    //int retorno = 0;
-    //return retorno;
+    int retorno = 0;
 
-    int retorno = getDadosDeTodasEstruturasAuxiliares(vetorAux);
+    retorno = getDadosDeTodasEstruturasAuxiliares(vetorAux);
 
     if (retorno == SUCESSO) {
         int totalElementos = 0;
@@ -561,7 +498,7 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao)
         return retorno;
     }
 
-    posicao -= 1;
+    posicao = posicao - 1;
 
     if (vetorPrincipal[posicao] == NULL) {
         retorno = SEM_ESTRUTURA_AUXILIAR;
