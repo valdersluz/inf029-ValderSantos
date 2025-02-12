@@ -28,6 +28,15 @@ void inicializar()
 
     }
 
+    FILE *arquivo = fopen("EstruturaPrincipal.txt", "w");
+    if(arquivo == NULL){
+        printf("Erro ao abrir o arquivo");
+        return;
+    } else {
+
+
+    }
+
 }
 
 /*
