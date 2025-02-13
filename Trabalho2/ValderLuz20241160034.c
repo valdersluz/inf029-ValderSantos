@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define TAM 10
 
 #include "ValderLuz20241160034.h"
@@ -14,7 +15,7 @@ typedef struct vetPrincipal{
 
 VetPrincipal *vetorPrincipal[TAM];
 
-
+FILE *arquivo;
 /*
 Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 
@@ -28,16 +29,42 @@ void inicializar()
 
     }
 
-    FILE *arquivo = fopen("EstruturaPrincipal.txt", "w");
+    arquivo = fopen("EstruturaPrincipal.txt", "a");
     if(arquivo == NULL){
         printf("Erro ao abrir o arquivo");
-        return;
+        exit(1);
+    }
+}
+
+void arquivoPrimeiraVez() {
+    char *separador;
+    int contador;
+    char linha[100];
+
+    FILE *arquivo = fopen("EstruturaPrincipal.txt", "w");
+    if (!arquivo) {
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);
     } else {
 
+        while(fgets(linha, sizeof(linha), arquivo) != NULL){
+            separador = strtok(linha, "\n");
+            contador = 0;
+            while(contador < 2){
+                if(contador == 0){
+
+                }
+            }
+
+
+        }
 
     }
 
+
 }
+
+
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
