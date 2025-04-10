@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #define TAM 3
 
 typedef struct {
@@ -118,18 +121,32 @@ int main(){
 
                 }
                 break;
-            }/*
+            }
             case 5:{
                 //atualizar ou editar animal
 
-                int nome_animal[20];
-                printf("Digite o nome do animal para excluir: ");
-                scanf("%s", nome_animal);
+
+
+                printf("Deseja mudar o nome: S/N ?");
+                char letra;
+                scanf("%c", &letra);
+
+                letra = toupper(letra);
+                if(letra == 'S'){
+
+                    int nome_animal[20];
+                    printf("Digite o nome do animal que quer modificar: ");
+                    fgets(listaAnimais[i].nome, 20, stdin);
+                    size_t ln = strlen(listaAnimais[i].nome) - 1;
+                    if(listaAnimais[i].nome[ln] == '\n')
+                        listaAnimais[i].nome[ln] = '\0';
+
+                }
 
 
 
                 break;
-            }*/
+            }
             case 0:{
                 sair = 1;
                 break;
