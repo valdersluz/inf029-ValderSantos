@@ -26,6 +26,7 @@ int main(){
     int sair = 0;
     int opcao;
     int qtd = 0;
+    char letra;
 
     while (!sair){    //sair == 0    OU    sair != 1
         printf("Opções\n");
@@ -33,6 +34,7 @@ int main(){
         printf("2 - Imprimir todos\n");
         printf("3 - Imprimir maiores que a média\n");
         printf("4 - Excluir animal\n");
+        printf("5 - Atualizar animal\n");
         printf("0 - Sair\n");
         scanf("%d", &opcao);
 
@@ -125,24 +127,78 @@ int main(){
             case 5:{
                 //atualizar ou editar animal
 
+                for(int i = 0; i < qtd; i++){
 
+                    printf("Deseja mudar o nome: S/N ?");
+                    getchar();
+                    scanf("%c", &letra);
 
-                printf("Deseja mudar o nome: S/N ?");
-                char letra;
-                scanf("%c", &letra);
+                    letra = toupper(letra);
+                    if(letra == 'S'){
 
-                letra = toupper(letra);
-                if(letra == 'S'){
+                        int nome_animal[20];
+                        printf("Digite o nome do animal que quer modificar: ");
+                        getchar();
+                        fgets(listaAnimais[i].nome, 20, stdin);
+                        size_t ln = strlen(listaAnimais[i].nome) - 1;
+                        if(listaAnimais[i].nome[ln] == '\n')
+                            listaAnimais[i].nome[ln] = '\0';
 
-                    int nome_animal[20];
-                    printf("Digite o nome do animal que quer modificar: ");
-                    fgets(listaAnimais[i].nome, 20, stdin);
-                    size_t ln = strlen(listaAnimais[i].nome) - 1;
-                    if(listaAnimais[i].nome[ln] == '\n')
-                        listaAnimais[i].nome[ln] = '\0';
+                    }else{
+                        return;
+                    }
+
+                    printf("Deseja mudar o sexo: S/N ?");
+                    getchar();
+                    scanf("%c", &letra);
+
+                    letra = toupper(letra);
+                    if(letra == 'S'){
+                        getchar();
+                        printf("Digite novo sexo: ");
+                        scanf("%c", &listaAnimais[i].sexo);
+                    } else{
+                        return;
+                    }
+
+                    //idade
+                    getchar();
+                    printf("Deseja mudar a idade: S/N ?");
+                    scanf("%c", &letra);
+
+                    letra = toupper(letra);
+                    if(letra == 'S'){
+                        getchar();
+                        printf("Digite a nova idade: ");
+                        scanf("%d", &listaAnimais[i].idade);
+                    } else{
+                        return;
+                    }
+
+                    // data de nascimento
+
+                    printf("Deseja mudar a data de nascimento: S/N ?");
+                    getchar();
+                    scanf("%c", &letra);
+
+                    letra = toupper(letra);
+                    if(letra == 'S'){
+                        printf("Digite o novo dia de nascimento: \n");
+                        getchar();
+                        scanf("%d", &listaAnimais[i].data.dia);
+
+                        printf("Digite o novo mês de nascimento: \n");
+                        getchar();
+                        scanf("%d", &listaAnimais[i].data.mes);
+
+                        printf("Digite o novo ano de nascimento: \n");
+                        getchar();
+                        scanf("%d", &listaAnimais[i].data.ano);
+                    } else{
+                        return;
+                    }
 
                 }
-
 
 
                 break;
