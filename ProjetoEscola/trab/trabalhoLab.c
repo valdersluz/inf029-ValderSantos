@@ -321,11 +321,11 @@ int atualizarAluno(Aluno listaAluno[], int qtdAluno){
 
                 do {
                     printf("Digite o novo dia de nascimento: ");
-                    scanf(" %d", listaAluno[qtdAluno].nascimento.dia);
+                    scanf(" %d", &listaAluno[qtdAluno].nascimento.dia);
                     printf("Digite o novo mes de nascimento: ");
-                    scanf(" %d", listaAluno[qtdAluno].nascimento.mes);
+                    scanf(" %d", &listaAluno[qtdAluno].nascimento.mes);
                     printf("Digite o novo ano de nascimento: ");
-                    scanf(" %d", listaAluno[qtdAluno].nascimento.ano);
+                    scanf(" %d", &listaAluno[qtdAluno].nascimento.ano);
                     retorno = validarData(listaAluno[qtdAluno].nascimento);
                     if (!retorno){
                         printf("Digite a data novamente, dados inválidos!\n");
@@ -544,6 +544,7 @@ int atualizarProfessor(Professor listaProfessor[], int qtdProfessor){
                     scanf(" %d", &listaProfessor[qtdProfessor].nascimento.mes);
                     printf("Digite o novo ano de nascimento: ");
                     scanf(" %d", &listaProfessor[qtdProfessor].nascimento.ano);
+                    retorno = validarData(listaProfessor[qtdProfessor].nascimento);
                     if (!retorno){
                         printf("Digite a data novamente, dados inválidos!\n");
                     }
