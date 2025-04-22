@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#define COD 6
 #define TAM_ALUNO 10
 #define TAM_PROFESSOR 10
 #define TAM_DISCIPLINA 10
@@ -32,6 +33,7 @@ typedef struct alu{
     char cpf[12];
     int ativo;
     int disciplina;
+    int numeroDeDisciplinas
  } Aluno;
 
 typedef struct aux{
@@ -50,11 +52,12 @@ typedef struct pro{
 
 typedef struct dis{
     char nome[40];
-    char codigo[6];
+    char codigo[COD];
     int semestre;
     int matriculaProf;
     int alunos[43];
     int ativo;
+    int qtdAlunosNaDisciplina;
  } Disciplina;
 
 //FUNCÕES DE VALIDAÇÃO
@@ -738,31 +741,45 @@ int excluirDisciplina(Disciplina listaDisciplina[], int qtdDisciplina){
 
 }
 
+void cadastrarAlunoNaDisciplina(Aluno listaAluno[], Disciplina listaDisciplina[], int qtdAluno, int qtdDisciplina, int qtdAlunoNaDisciplina){
+    char buscaDisciplina[30];
+    char buscaAluno[30];
+    int achou = 0;
+    int local = 0;
 
-//----------------------------EU TO AQUI-----------------------------
+    printf("Digite o nome da disciplina que deseja cadastrar um aluno: ");
+    while(getchar() != '\n');
+    fgets(buscaDisciplina, 30, stdin);
 
-/*
-matricularAluno(Aluno listaAluno[], Disciplina listaDisciplina[], int qtdAluno, int qtdDisciplina){
-    printf("Digite a matricula do Aluno: ");
-    int matriculaAluno;
-    scanf("%d", &matriculaAluno);
+    for(int i = 0; i < qtdDisciplina; i++){
+        if (strcmp(listaDisciplina[i].nome, buscaDisciplina)){
+            achou = 1;
+            int local = i;
+        }
+    }
 
-    if(matriculaAluno < 0){
-        printf("Matricula Invalida");
-    }else{
-        for(int i = 0; i < qtdDisciplina; i++){
-           if(listaAluno[i].matricula == matriculaAluno){
-                listaDisciplina[i].alunos[]
-
-           }
-
+    if(achou == 0){
+        printf("Disciplina não encontrada");
+    } else if(achou == 1){
+        achou = 0;
+        printf("Digite a matrícula do aluno que deseja cadastrar: ");
+        getchar();
+        fgets(buscaAluno, 30, stdin);
+        for(int i = 0; i < qtdAluno; i++){
+            if (strcmp(listaAluno[i].nome, buscaAluno)){
+                achou = 1;
+                listaDisciplina[local].alunos[qtdAlunoNaDisciplina] = listaAluno[i].matricula;
+                listaDisciplina[local].qtdAlunosNaDisciplina += 1;
+                listaAluno[i].numeroDeDisciplinas += 1;
+                break;
+            }
         }
 
+    }else {
+        printf("Opção Inválida!");
     }
 
 }
-
-*/
 
 
 //FUNÇÕES RELATÓRIOS
