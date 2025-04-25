@@ -213,7 +213,7 @@ int cadastrarAluno(Aluno listaAluno[], int qtdAluno){
                 printf("Digite o mes de nascimento: ");
                 scanf("%d", &listaAluno[qtdAluno].nascimento.mes);
                 printf("Digite o ano de nascimento: ");
-                scanf("%d]", &listaAluno[qtdAluno].nascimento.ano);
+                scanf("%d", &listaAluno[qtdAluno].nascimento.ano);
                 retorno = validarData(listaAluno[qtdAluno].nascimento);
                 if (!retorno){
                     printf("Digite a data novamente, dados inválidos!\n");
@@ -393,6 +393,11 @@ int excluirAluno(Aluno listaAluno[], int qtdAluno){
                     listaAluno[j].matricula = listaAluno[j+1].matricula;    //SHIFT
                     listaAluno[j].sexo = listaAluno[j+1].sexo;              //SHIFT
                     listaAluno[j].ativo = listaAluno[j+1].ativo;            //SHIFT
+                    listaAluno[j].cpf = listaAluno[j+1].cpf;
+                    listaAluno[j].nome = listaAluno[j+1].nome;
+                    listaAluno[j].nascimento.dia = listaAluno[j+1].nascimento.dia;
+                    listaAluno[j].nascimento.mes = listaAluno[j+1].nascimento.mes;
+                    listaAluno[j].nascimento.ano = listaAluno[j+1].nascimento.ano;
                 }
                 achou =1;
                 break;
@@ -611,6 +616,11 @@ int excluirProfessor(Professor listaProfessor[], int qtdProfessor){
                     listaProfessor[j].matricula = listaProfessor[j+1].matricula;    //SHIFT
                     listaProfessor[j].sexo = listaProfessor[j+1].sexo;              //SHIFT
                     listaProfessor[j].ativo = listaProfessor[j+1].ativo;            //SHIFT
+                    listaProfessor[j].cpf = listaProfessor[j+1].cpf;
+                    listaProfessor[j].nome = listaProfessor[j+1].nome;
+                    listaProfessor[j].nascimento.dia = listaProfessor[j+1].nascimento.dia;
+                    listaProfessor[j].nascimento.mes = listaProfessor[j+1].nascimento.mes;
+                    listaProfessor[j].nascimento.ano = listaProfessor[j+1].nascimento.ano;
                 }
                 achou =1;
                 break;
@@ -756,13 +766,17 @@ int excluirDisciplina(Disciplina listaDisciplina[], int qtdDisciplina){
     scanf("%s", &codigoExcluir);
     if (codigoExcluir == "") { printf("Disciplina Inválida"); }
     else {
-        for (int i = 0; i<qtdDisciplina;i++){
+        for (int i = 0; i < qtdDisciplina;i++){
             if (strcmp(listaDisciplina[qtdDisciplina].codigo, codigoExcluir) == true){
                 listaDisciplina[i].ativo = 0;
                 for (int j = i; j < qtdDisciplina -1; j++){                                 //SHIFT
                     listaDisciplina[j].semestre = listaDisciplina[j+1].semestre;
                     listaDisciplina[j].matriculaProf = listaDisciplina[j+1].matriculaProf;
                     listaDisciplina[j].ativo = listaDisciplina[j+1].ativo;
+                    listaDisciplina[j].alunos = listaDisciplina[j+1].alunos;
+                    listaDisciplina[j].codigo = listaDisciplina[j+1].codigo;
+                    listaDisciplina[j].semestre = listaDisciplina[j+1].semestre;
+                    listaDisciplina[j].qtdAlunosNaDisciplina = listaDisciplina[j+1].qtdAlunosNaDisciplina;
                 }
                 achou = 1;
                 break;
