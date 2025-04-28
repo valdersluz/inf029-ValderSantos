@@ -1,5 +1,3 @@
-
-//DECLARAÇÕES
 #include <stdio.h>
 #include <locale.h>
 #include <string.h>
@@ -291,11 +289,11 @@ void detalharDisciplinaEAlunosMatriculados(Disciplina listaDisciplina[], int qtd
     fgets(buscaDisciplina, 6, stdin);
 
     for(int i = 0; i < qtdDisciplina; i++){
-        if(strcmp(buscaDisciplina, listaDisciplina[i].codigo)){
+        if(strcmp(buscaDisciplina, listaDisciplina[i].codigo) == 0){
             achou = 1;
             printf("Nome: %s \n", listaDisciplina[i].nome);
             printf("---------------------------- Alunos ------------------------");
-            for(int j = 0; j < listaDisciplina[i].qtdAlunosNaDisciplina; i++){
+            for(int j = 0; j < listaDisciplina[i].qtdAlunosNaDisciplina; j++){
                for(int k = 0; k < qtdAluno; k++){
                     if(listaDisciplina[i].alunos[j] == listaAluno[k].matricula){
                         printf("%s, Matricula: %d\n", listaAluno[k].nome, listaAluno[k].matricula);
@@ -393,8 +391,8 @@ int excluirAluno(Aluno listaAluno[], int qtdAluno){
                     listaAluno[j].matricula = listaAluno[j+1].matricula;    //SHIFT
                     listaAluno[j].sexo = listaAluno[j+1].sexo;              //SHIFT
                     listaAluno[j].ativo = listaAluno[j+1].ativo;            //SHIFT
-                    listaAluno[j].cpf = listaAluno[j+1].cpf;
-                    listaAluno[j].nome = listaAluno[j+1].nome;
+                    strcmp(listaAluno[j].cpf, listaAluno[j+1].cpf);
+                    strcmp(listaAluno[j].nome, listaAluno[j+1].nome);
                     listaAluno[j].nascimento.dia = listaAluno[j+1].nascimento.dia;
                     listaAluno[j].nascimento.mes = listaAluno[j+1].nascimento.mes;
                     listaAluno[j].nascimento.ano = listaAluno[j+1].nascimento.ano;
@@ -616,8 +614,8 @@ int excluirProfessor(Professor listaProfessor[], int qtdProfessor){
                     listaProfessor[j].matricula = listaProfessor[j+1].matricula;    //SHIFT
                     listaProfessor[j].sexo = listaProfessor[j+1].sexo;              //SHIFT
                     listaProfessor[j].ativo = listaProfessor[j+1].ativo;            //SHIFT
-                    listaProfessor[j].cpf = listaProfessor[j+1].cpf;
-                    listaProfessor[j].nome = listaProfessor[j+1].nome;
+                    strcmp(listaProfessor[j].cpf, listaProfessor[j+1].cpf);
+                    strcmp(listaProfessor[j].nome, listaProfessor[j+1].nome);
                     listaProfessor[j].nascimento.dia = listaProfessor[j+1].nascimento.dia;
                     listaProfessor[j].nascimento.mes = listaProfessor[j+1].nascimento.mes;
                     listaProfessor[j].nascimento.ano = listaProfessor[j+1].nascimento.ano;
@@ -689,11 +687,10 @@ void listarDisciplina(Disciplina listaDisciplina[], Professor listaProfessor[], 
                 printf("Nome: %s\n", listaDisciplina[i].nome);
                 printf("Código: %s\n", listaDisciplina[i].codigo);
                 printf("Semestre: %d\n", listaDisciplina[i].semestre);
-                printf("Professor: %d\n", listaDisciplina[i].matriculaProf);
                 for(int j = 0; j < qtdProfessor; j++){
-                    if(listaDisciplina[i].matriculaProf == listaProfessor[i].matricula){
-                        printf("Professor: %s\n", listaDisciplina[i].nome);
-                        printf("Matrícula do Professor: %d\n", listaDisciplina[i].matriculaProf);
+                    if(listaDisciplina[i].matriculaProf == listaProfessor[j].matricula){
+                        printf("Professor: %s\n", listaProfessor[j].nome);
+                        printf("Matrícula do Professor: %d\n", listaDisciplina[j].matriculaProf);
                     }
                 }
                 printf("Número de aluno na disciplina: %d\n", listaDisciplina[i].qtdAlunosNaDisciplina);
@@ -712,6 +709,7 @@ int atualizarDisciplina(Disciplina listaDisciplina[], Professor listaProfessor[]
     printf("Atualizar Disciplina!\n");
     printf("Digite o código da disciplina que deseja atualizar: ");
     scanf("%s", codigoAtualizar);
+
     int achou = 0;
 
     for (int i = 0; i < qtdDisciplina; i++) {
@@ -767,14 +765,14 @@ int excluirDisciplina(Disciplina listaDisciplina[], int qtdDisciplina){
     if (codigoExcluir == "") { printf("Disciplina Inválida"); }
     else {
         for (int i = 0; i < qtdDisciplina;i++){
-            if (strcmp(listaDisciplina[qtdDisciplina].codigo, codigoExcluir) == true){
+            if (strcmp(listaDisciplina[qtdDisciplina].codigo, codigoExcluir) == 0){
                 listaDisciplina[i].ativo = 0;
                 for (int j = i; j < qtdDisciplina -1; j++){                                 //SHIFT
                     listaDisciplina[j].semestre = listaDisciplina[j+1].semestre;
                     listaDisciplina[j].matriculaProf = listaDisciplina[j+1].matriculaProf;
                     listaDisciplina[j].ativo = listaDisciplina[j+1].ativo;
-                    listaDisciplina[j].alunos = listaDisciplina[j+1].alunos;
-                    listaDisciplina[j].codigo = listaDisciplina[j+1].codigo;
+                    strcmp(listaDisciplina[j].alunos, listaDisciplina[j+1].alunos);
+                    strcmp(listaDisciplina[j].codigo, listaDisciplina[j+1].codigo);
                     listaDisciplina[j].semestre = listaDisciplina[j+1].semestre;
                     listaDisciplina[j].qtdAlunosNaDisciplina = listaDisciplina[j+1].qtdAlunosNaDisciplina;
                 }
@@ -800,7 +798,7 @@ void cadastrarAlunoNaDisciplina(Aluno listaAluno[], Disciplina listaDisciplina[]
     for(int i = 0; i < qtdDisciplina; i++){
         if (strcmp(listaDisciplina[i].nome, buscaDisciplina)){
             achou = 1;
-            int local = i;
+            local = i;
         }
     }
 
@@ -899,9 +897,10 @@ void listarDisciplinaComMaisDeQuarentaAlunos(Disciplina listaDisciplina[], int q
 }
 
 void ListarAlunoPorNome(Aluno listaAluno[],int qtdAluno){
+
     for (char i = 'A'; i <= 'Z'; i++){
         for (int j = 0; j < qtdAluno; j++){
-            if (listaAluno[j].nome[0] == i){
+            if (listaAluno[j].nome[0] == i && listaAluno[j].ativo == 1){
                 puts(listaAluno[j].nome);
             }
         }
@@ -941,7 +940,7 @@ void ListarAlunoPorSexo(Aluno listaAluno[], int qtdAluno){
 void ListarProfessorPorNome(Professor listaProfessor[],int qtdProfessor){
     for (char i = 'A'; i <= 'Z'; i++){
         for (int j = 0; j < qtdProfessor; j++){
-            if (listaProfessor[j].nome[0] == i){
+            if (listaProfessor[j].nome[0] == i && listaProfessor[j].ativo == 1){
                 puts(listaProfessor[j].nome);
             }
         }
