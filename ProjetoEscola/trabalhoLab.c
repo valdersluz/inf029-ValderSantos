@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <ctype.h>
 #define COD 6
 #define TAM_ALUNO 10
 #define TAM_PROFESSOR 10
@@ -31,7 +32,7 @@ typedef struct alu{
     char cpf[12];
     int ativo;
     int disciplina;
-    int numeroDeDisciplinas
+    int numeroDeDisciplinas;
  } Aluno;
 
 typedef struct aux{
