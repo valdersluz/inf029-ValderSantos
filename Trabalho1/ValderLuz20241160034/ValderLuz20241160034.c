@@ -453,6 +453,16 @@ int q6(int numerobase, int numerobusca)
     return qtdOcorrencias;
 }
 
+ int q7(char matriz[8][10], char palavra[5])
+ {
+     int achou;
+     char sentinela;
+
+     printf("aqui dentro\n");
+
+     return achou;
+ }
+
 
 
 DataQuebrada quebraData(char data[]){

@@ -38,10 +38,11 @@ int main()
     //testQ1();
     //testQ2();
     //testQ3();
-    testQ4();
     /*
+    testQ4();
     testQ5();
     testQ6();*/
+    testQ7();
 }
 
 /*
@@ -324,5 +325,28 @@ void testQ6()
     printf("%d\n",q6(1234, 13) == 0);
     printf("%d\n",q6(544444, 4) == 5);
     printf("%d\n",q6(1234562354, 32) == 0);
+}
+
+void testQ7()
+{
+    char matrix[8][10] = {
+        { 'Q', 'M', 'J', 'D', 'L', 'A', 'Z', 'F', 'C', 'R' },
+        { 'N', 'B', 'Y', 'G', 'P', 'S', 'K', 'H', 'E', 'X' },
+        { 'V', 'O', 'W', 'U', 'T', 'I', 'Z', 'A', 'L', 'C' },
+        { 'M', 'Q', 'B', 'D', 'N', 'F', 'R', 'J', 'G', 'E' },
+        { 'H', 'S', 'K', 'T', 'U', 'X', 'W', 'O', 'P', 'Y' },
+        { 'C', 'Z', 'A', 'I', 'L', 'M', 'V', 'G', 'N', 'B' },
+        { 'D', 'F', 'E', 'H', 'S', 'K', 'J', 'Q', 'R', 'T' },
+        { 'U', 'X', 'Y', 'W', 'V', 'O', 'P', 'N', 'M', 'L' }
+    };
+    char stringBusca [6] = { 'F', 'E', 'H', 'S', 'K'};
+    printf("%d\n", q7(matrix, stringBusca) == 1);
+    strcpy(stringBusca, "KJQRT");
+    printf("%d\n", q7(matrix, stringBusca) == 1);
+    strcpy(stringBusca, "AATOK");
+    printf("%d\n", q7(matrix, stringBusca) == 0);
+    strcpy(stringBusca, "LTBON");
+    printf("%d\n", q7(matrix, stringBusca) == 1);
+
 }
 
