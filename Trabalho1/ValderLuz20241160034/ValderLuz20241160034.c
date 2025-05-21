@@ -453,9 +453,13 @@ int q6(int numerobase, int numerobusca)
     return qtdOcorrencias;
 }
 
-void direita(char matriz[8][10], int i, int j){
+void direita(char matriz[8][10], int i, int j, int len, char palavra[5]){
     for(int d = j; d < 10; d++){
-        printf("%c", matriz[i][d]);
+        for(int k = 0; k < len; k++){
+            if(matriz[i][j] == palavra[k]){
+                printf("%c", matriz[i][d]);
+            }
+        }
     }
 }
 
@@ -463,16 +467,15 @@ void direita(char matriz[8][10], int i, int j){
 int q7(char matriz[8][10], char palavra[5])
 {
      int achou;
-
+     int len = strlen(palavra);
      for(int i = 0; i < 8; i++){
         for(int j = 0; j < 10; j++){
             if(matriz[i][j] == palavra[0]){
-                direita(matriz, i, j);
+                direita(matriz, i, j, len, palavra);
+                printf("\n");
             }
         }
      }
-
-     //printf("aqui dentro: %c\n");
 
      return achou;
 }
