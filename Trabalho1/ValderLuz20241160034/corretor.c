@@ -346,6 +346,12 @@ void testQ7()
     strcpy(stringBusca, "AATOK");
     printf("%d\n", q7(matrix, stringBusca) == 0);
     strcpy(stringBusca, "LTBON");
+    printf("%d\n", q7(matrix, stringBusca) == 0);
+    strcpy(stringBusca, "BBBBB");
+    printf("%d\n", q7(matrix, stringBusca) == 0);
+    strcpy(stringBusca, "VOPYN");
+    printf("%d\n", q7(matrix, stringBusca) == 0);
+    strcpy(stringBusca, "XYWVO");
     printf("%d\n", q7(matrix, stringBusca) == 1);
 
 }
