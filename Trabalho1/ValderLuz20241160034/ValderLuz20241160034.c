@@ -455,10 +455,14 @@ int q6(int numerobase, int numerobusca)
 
 int direita(char matriz[8][10], int linha, int coluna, char palavra[5]){
     int cont = 0;
+
+    if(coluna + strlen(palavra) > 10){
+        return cont;
+    }
     for(int d = coluna; cont < strlen(palavra); d++){
         //printf("%c", matriz[linha][d]);
 
-        printf("[%c]->[%d]", palavra[0],cont);
+        //printf("[%c]->[%d]", palavra[0],cont);
         if(matriz[linha][d] != palavra[cont]){
             cont = 0;
             break;
@@ -470,17 +474,39 @@ int direita(char matriz[8][10], int linha, int coluna, char palavra[5]){
 }
 
 
+int esquerda(char matriz[8][10], int linha, int coluna, char palavra[5]){
+    int cont = 0;
+
+    if(coluna - strlen(palavra) < 0){
+        return 0;
+    }
+
+    for(int d = coluna; ; d--){ // falta isso aqui
+
+        if(matriz[linha][d] != palavra[cont]){
+            cont = 0;
+            break;
+        }
+
+    }
+
+    return cont;
+
+}
+
+
 int q7(char matriz[8][10], char palavra[5])
 {
-     int achou = 0;
+     int achou = -1;
      int controle;
      for(int linha = 0; linha < 8; linha++){
         for(int coluna = 0; coluna < 10; coluna++){
             if(matriz[linha][coluna] == palavra[0]){
                 controle = direita(matriz, linha, coluna, palavra);
-
                 if(controle == strlen(palavra)){
                     achou = 1;
+                }else{
+                    achou = 0;
                 }
                 printf("\n");
             }
