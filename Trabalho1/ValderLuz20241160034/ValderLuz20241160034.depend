@@ -12,16 +12,17 @@
 	<string.h>
 	"ValderLuz20241160034.h"
 
-1747532372 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho1/ValderLuz20241160034/corretor.c
+1748392428 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho1/ValderLuz20241160034/corretor.c
 	<stdio.h>
 	<string.h>
 	"ValderLuz20241160034.h"
 
-1747532372 /home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho1/ValderLuz20241160034/ValderLuz20241160034.h
+1748392683 /home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho1/ValderLuz20241160034/ValderLuz20241160034.h
 
-1747577565 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho1/ValderLuz20241160034/ValderLuz20241160034.c
+1748392775 source:/home/valder/Documentos/LabProg/inf029-ValderSantos/Trabalho1/ValderLuz20241160034/ValderLuz20241160034.c
 	<stdio.h>
 	"ValderLuz20241160034.h"
 	<stdlib.h>
 	<ctype.h>
+	<string.h>
 

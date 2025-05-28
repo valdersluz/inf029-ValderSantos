@@ -25,6 +25,9 @@
 #include "ValderLuz20241160034.h" // Substitua pelo seu arquivo de header renomeado
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
+
+#define TAM 3
 
 DataQuebrada quebraData(char data[]);
 
@@ -397,6 +400,16 @@ int q4(char *strTexto, char *strBusca, int posicoes[30])
     Número invertido
  */
 
+ int q5(int num) {
+    int invertido = 0;
+    while (num != 0) {
+        int digito = num % 10;
+        invertido = invertido * 10 + digito;
+        num /= 10;
+    }
+    return invertido;
+}
+/*
 int q5(int num)
 {
     char snum[10];
@@ -411,7 +424,7 @@ int q5(int num)
     num = atoi(aux);
 
     return num;
-}
+}*/
 
 /*
  Q6 = ocorrência de um número em outro
@@ -447,9 +460,6 @@ int q6(int numerobase, int numerobusca)
             k = 0;
         }
     }
-
-
-
     return qtdOcorrencias;
 }
 
@@ -460,16 +470,12 @@ int direita(char matriz[8][10], int linha, int coluna, char palavra[5]){
         return cont;
     }
     for(int d = coluna; cont < strlen(palavra); d++){
-        //printf("%c", matriz[linha][d]);
-
-        //printf("[%c]->[%d]", palavra[0],cont);
         if(matriz[linha][d] != palavra[cont]){
             cont = 0;
             break;
         }
         cont++;
     }
-
     return cont;
 }
 
@@ -477,21 +483,119 @@ int direita(char matriz[8][10], int linha, int coluna, char palavra[5]){
 int esquerda(char matriz[8][10], int linha, int coluna, char palavra[5]){
     int cont = 0;
 
-    if(coluna - strlen(palavra) < 0){
+    if(coluna - (strlen(palavra) - 1) < 0){
         return 0;
     }
-
-    for(int d = coluna; ; d--){ // falta isso aqui
-
+    for(int d = coluna; cont < strlen(palavra); d--){
         if(matriz[linha][d] != palavra[cont]){
             cont = 0;
             break;
         }
+        cont++;
+    }
+    return cont;
+}
 
+int cima(char matriz[8][10], int linha, int coluna, char palavra[5]){
+    int cont = 0;
+
+    if(linha - (strlen(palavra) - 1) < 0){
+        return 0;
+    }
+    for(int d = linha; cont < strlen(palavra); d--){
+        if(matriz[d][coluna] != palavra[cont]){
+            cont = 0;
+            break;
+        }
+        cont++;
+    }
+    return cont;
+}
+
+int embaixo(char matriz[8][10], int linha, int coluna, char palavra[5]){
+    int cont = 0;
+
+    if(linha + strlen(palavra) > 8){
+        return 0;
+    }
+    for(int d = linha; cont < strlen(palavra); d++){
+        if(matriz[d][coluna] != palavra[cont]){
+            cont = 0;
+            break;
+        }
+        cont++;
+    }
+    return cont;
+}
+
+//[positivo][positivo]
+int diagonal_inf_direita(char matriz[8][10], int linha, int coluna, char palavra[5]){
+    int cont = 0;
+
+    if( (linha + strlen(palavra) > 8) || ( coluna + strlen(palavra) > 10) ){
+        return 0;
     }
 
+    for(int d = 0; cont < strlen(palavra); d++){
+        if(matriz[linha + d][coluna + d] != palavra[cont]){
+            cont = 0;
+            break;
+        }
+        cont++;
+    }
     return cont;
+}
 
+//[negativo][positivo]
+int diagonal_sup_direita(char matriz[8][10], int linha, int coluna, char palavra[5]){
+    int cont = 0;
+
+    if((linha - (strlen(palavra) - 1) < 0) || (coluna + strlen(palavra) > 10)){
+        return 0;
+    }
+
+    for(int d = 0; cont < strlen(palavra); d++){
+        if(matriz[linha - d][coluna + d] != palavra[cont]){
+            cont = 0;
+            break;
+        }
+        cont++;
+    }
+    return cont;
+}
+
+//[positivo][negativo]
+int diagonal_inf_esquerda(char matriz[8][10], int linha, int coluna, char palavra[5]){
+    int cont = 0;
+
+    if((linha + (strlen(palavra)) > 8) || (coluna - (strlen(palavra) - 1)) < 0 ){
+        return 0;
+    }
+    for(int d = 0; cont < strlen(palavra); d++){
+        if(matriz[linha + d][coluna - d] != palavra[cont]){
+            cont = 0;
+            break;
+        }
+        cont++;
+    }
+    return cont;
+}
+
+// [negativo][negativo]
+int diagonal_sup_esquerda(char matriz[8][10], int linha, int coluna, char palavra[5]){
+    int cont = 0;
+
+    if((linha - (strlen(palavra) - 1) < 0 ) || (coluna - (strlen(palavra) - 1)) < 0){
+        return 0;
+    }
+    for(int d = 0; cont < strlen(palavra); d++){
+        if(matriz[linha - d][coluna - d] != palavra[cont]){
+            cont = 0;
+            break;
+        }
+        cont++;
+    }
+    return cont;
 }
 
 
@@ -505,19 +609,159 @@ int q7(char matriz[8][10], char palavra[5])
                 controle = direita(matriz, linha, coluna, palavra);
                 if(controle == strlen(palavra)){
                     achou = 1;
+                    return achou;
                 }else{
                     achou = 0;
                 }
-                printf("\n");
+                controle = esquerda(matriz, linha, coluna, palavra);
+                //printf("controle %d", controle);
+                if(controle == strlen(palavra)){
+                    achou = 1;
+                    return achou;
+                }else{
+                    achou = 0;
+                }
+                controle = cima(matriz, linha, coluna, palavra);
+                //printf("controle %d", controle);
+                if(controle == strlen(palavra)){
+                    achou = 1;
+                    return achou;
+                }else{
+                    achou = 0;
+                }
+                controle = embaixo(matriz, linha, coluna, palavra);
+                //printf("controle %d", controle);
+                if(controle == strlen(palavra)){
+                    achou = 1;
+                    return achou;
+                }else{
+                    achou = 0;
+                }
+                controle = diagonal_inf_direita(matriz, linha, coluna, palavra);
+                //printf("controle %d", controle);
+                if(controle == strlen(palavra)){
+                    achou = 1;
+                    return achou;
+                }else{
+                    achou = 0;
+                }
+                controle = diagonal_sup_direita(matriz, linha, coluna, palavra);
+                //printf("controle %d", controle);
+                if(controle == strlen(palavra)){
+                    achou = 1;
+                    return achou;
+                }else{
+                    achou = 0;
+                }
+                controle = diagonal_inf_esquerda(matriz, linha, coluna, palavra);
+                //printf("controle %d", controle);
+                if(controle == strlen(palavra)){
+                    achou = 1;
+                    return achou;
+                }else{
+                    achou = 0;
+                }
+                controle = diagonal_sup_esquerda(matriz, linha, coluna, palavra);
+                //printf("controle %d", controle);
+                if(controle == strlen(palavra)){
+                    achou = 1;
+                    return achou;
+                }else{
+                    achou = 0;
+                }
+                //printf("\n");
             }
         }
      }
         //printf("achou->[%d]", controle);
-     //for();
-
      return achou;
 }
 
+void imprimirTabuleiro(char tabuleiro[TAM][TAM]) {
+    printf("   1   2   3\n");
+    for (int i = 0; i < TAM; i++) {
+        printf("%c ", 'A' + i);
+        for (int j = 0; j < TAM; j++) {
+            printf(" %c ", tabuleiro[i][j]);
+            if (j < TAM - 1) printf("|");
+        }
+        printf("\n");
+        if (i < TAM - 1) printf("  ---+---+---\n");
+    }
+}
+
+int verificarGanhador(char tabuleiro[TAM][TAM], char jogador) {
+    for (int i = 0; i < TAM; i++) {
+        // Linhas e colunas
+        if ((tabuleiro[i][0] == jogador && tabuleiro[i][1] == jogador && tabuleiro[i][2] == jogador) ||
+            (tabuleiro[0][i] == jogador && tabuleiro[1][i] == jogador && tabuleiro[2][i] == jogador)) {
+            return 1;
+        }
+    }
+    // Diagonais
+    if ((tabuleiro[0][0] == jogador && tabuleiro[1][1] == jogador && tabuleiro[2][2] == jogador) ||
+        (tabuleiro[0][2] == jogador && tabuleiro[1][1] == jogador && tabuleiro[2][0] == jogador)) {
+        return 1;
+    }
+    return 0;
+}
+
+void jogo_da_velha() {
+
+    char tabuleiro[TAM][TAM] = {
+        { ' ', ' ', ' ' },
+        { ' ', ' ', ' ' },
+        { ' ', ' ', ' ' }
+    };
+
+    int jogador = 1;
+    int jogadas = 0;
+    char entrada[3];
+
+    while (1) {
+        imprimirTabuleiro(tabuleiro);
+        printf("Jogador %d (%c), informe sua jogada (ex: B3): ", jogador, jogador == 1 ? 'X' : 'O');
+        scanf("%2s", entrada);
+
+        // Validação de entrada
+        if (strlen(entrada) != 2 || !isalpha(entrada[0]) || !isdigit(entrada[1])) {
+            printf("Entrada inválida! Use o formato A1, B2, etc.\n");
+            continue;
+        }
+
+        int linha = toupper(entrada[0]) - 'A';
+        int coluna = entrada[1] - '1';
+
+        if (linha < 0 || linha >= TAM || coluna < 0 || coluna >= TAM) {
+            printf("Coordenada fora do tabuleiro.\n");
+            continue;
+        }
+
+        if (tabuleiro[linha][coluna] != ' ') {
+            printf("Essa célula já está ocupada. Tente novamente.\n");
+            continue;
+        }
+
+        // Marca no tabuleiro
+        tabuleiro[linha][coluna] = jogador == 1 ? 'X' : 'O';
+        jogadas++;
+
+        // Verifica ganhador
+        if (verificarGanhador(tabuleiro, jogador == 1 ? 'X' : 'O')) {
+            imprimirTabuleiro(tabuleiro);
+            printf("Jogador %d venceu!\n", jogador);
+            break;
+        }
+
+        if (jogadas == 9) {
+            imprimirTabuleiro(tabuleiro);
+            printf("Empate! Ninguém venceu.\n");
+            break;
+        }
+
+        jogador = jogador == 1 ? 2 : 1;
+    }
+}
 
 
 DataQuebrada quebraData(char data[]){

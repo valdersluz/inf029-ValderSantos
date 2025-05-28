@@ -20,6 +20,7 @@
 //renomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.h
 #include "ValderLuz20241160034.h"
 
+#define TAM 3
 
 
 //void testSomar();    //função utilizada para testes
@@ -30,6 +31,8 @@ void testQ3();
 void testQ4();
 void testQ5();
 void testQ6();
+void testQ7();
+void jogo_da_velha();
 
 int main()
 {
@@ -38,11 +41,11 @@ int main()
     //testQ1();
     //testQ2();
     //testQ3();
-    /*
-    testQ4();
-    testQ5();
-    testQ6();*/
-    testQ7();
+    //testQ4();
+    //testQ5();
+    //testQ6();
+    //testQ7();
+    void jogo_da_velha();
 }
 
 /*
@@ -353,6 +356,14 @@ void testQ7()
     printf("%d\n", q7(matrix, stringBusca) == 0);
     strcpy(stringBusca, "XYWVO");
     printf("%d\n", q7(matrix, stringBusca) == 1);
+    strcpy(stringBusca, "FNDBQ");
+    printf("%d\n", q7(matrix, stringBusca) == 1);
+    strcpy(stringBusca, "TDUGD");
+    printf("%d\n", q7(matrix, stringBusca) == 1);
+    strcpy(stringBusca, "XRAER");
+    printf("%d\n", q7(matrix, stringBusca) == 1);
+    strcpy(stringBusca, "QNYZZ");
+    printf("%d\n", q7(matrix, stringBusca) == 0);
 
 }
 
