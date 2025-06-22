@@ -20,8 +20,6 @@
 //renomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.h
 #include "ValderLuz20241160034.h"
 
-#define TAM 3
-
 
 //void testSomar();    //função utilizada para testes
 //void testFatorial(); //função utilizada para testes
@@ -32,20 +30,18 @@ void testQ4();
 void testQ5();
 void testQ6();
 void testQ7();
-void jogo_da_velha();
 
 int main()
 {
     //testSomar();
     //testFatorial();
-    //testQ1();
-    //testQ2();
-    //testQ3();
-    //testQ4();
-    //testQ5();
-    //testQ6();
-    //testQ7();
-    void jogo_da_velha();
+    testQ1();
+    testQ2();
+    testQ3();
+    testQ4();
+    testQ5();
+    testQ6();
+    testQ7();
 }
 
 /*
