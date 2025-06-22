@@ -35,6 +35,57 @@ void inicializar()
         exit(1);
     }
 }
+/*
+void arquivoPrimeiraVez() {
+    char *separador;
+    int contador;
+    char linha[100];
+
+    FILE *arquivo = fopen("EstruturaPrincipal.txt", "w");
+    if (!arquivo) {
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);
+    } else {
+
+        while(fgets(vetorPrincipal, sizeof(vetorPrincipal), arquivo) != NULL){
+            separador = strtok(vetorPrincipal, "\n");
+            contador = 0;
+            while(contador < 2){
+                if(contador == 0){
+
+                }
+            }
+
+
+        }
+
+    }
+
+
+}*/
+
+void arquivoPrimeiraVez() {
+    arquivo = fopen("EstruturaPrincipal.txt", "w");  // Abre para escrita
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita!\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < TAM; i++) {
+        if (vetorPrincipal[i] != NULL) {
+            fprintf(arquivo, "Posicao %d - Tamanho: %d - Valores: ", i + 1, vetorPrincipal[i]->tamVetAux);
+            for (int j = 0; j < vetorPrincipal[i]->posicaoVetAux; j++) {
+                fprintf(arquivo, "%d ", vetorPrincipal[i]->vetor[j]);
+            }
+            fprintf(arquivo, "\n");
+        }
+    }
+
+    fclose(arquivo);
+}
+
+
+
 
 /*
 Objetivo: criar estrutura auxiliar na posição 'posicao'.
