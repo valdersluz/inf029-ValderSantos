@@ -28,12 +28,6 @@ void inicializar()
         vetorPrincipal[i] = NULL;
 
     }
-
-    arquivo = fopen("EstruturaPrincipal.txt", "a");
-    if(arquivo == NULL){
-        printf("Erro ao abrir o arquivo");
-        exit(1);
-    }
 }
 
 /*
@@ -615,8 +609,6 @@ void finalizar()
 {
     for(int i = 0; i < TAM; i++){
         if(vetorPrincipal[i] != NULL){
-            free(vetorPrincipal[i]->vetor);
-            free(vetorPrincipal[i]);
             vetorPrincipal[i] = NULL;
         }
     }
