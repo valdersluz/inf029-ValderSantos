@@ -15,7 +15,6 @@ typedef struct vetPrincipal{
 
 VetPrincipal *vetorPrincipal[TAM];
 
-FILE *arquivo;
 /*
 Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 

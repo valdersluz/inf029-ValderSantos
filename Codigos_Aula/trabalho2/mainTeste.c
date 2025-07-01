@@ -19,17 +19,17 @@ int main()
 {
     inicializar();
     testeInserirSemNada();
-    /*testeCriarEstrutura();
-    testeInserirComEstrutura();
-    testeExcluir();
-    testeExcluirNumeroEspecifico();
-    testeListar();
-    testeRetornarTodosNumeros();
-    testeMudarTamanhoEstrutura();
-    testeListaEncadeada();*/
+    //testeCriarEstrutura();
+    //testeInserirComEstrutura();
+    //testeExcluir();
+    //testeExcluirNumeroEspecifico();
+    //testeListar();
+    //testeRetornarTodosNumeros();
+    //testeMudarTamanhoEstrutura();
+    //testeListaEncadeada();
     finalizar();
 }
-int ligado = 0;
+int ligado = 1;
 void show_log(char *str)
 {
     if (ligado)
@@ -41,6 +41,7 @@ void testeInserirSemNada()
     show_log("testeInserirSemNada()");
     printf("%d\n", inserirNumeroEmEstrutura(2, 2) == SEM_ESTRUTURA_AUXILIAR);
     printf("%d\n", inserirNumeroEmEstrutura(-2, 2) == POSICAO_INVALIDA);
+    //printf("o que tem em: [%d]\n", inserirNumeroEmEstrutura(-2, 2));
     printf("%d\n", inserirNumeroEmEstrutura(0, 2) == POSICAO_INVALIDA);
     printf("%d\n", inserirNumeroEmEstrutura(11, 2) == POSICAO_INVALIDA);
 }

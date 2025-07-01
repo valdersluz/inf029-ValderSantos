@@ -28,15 +28,51 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
 {
 
     int retorno = 0;
-    // a posicao pode já existir estrutura auxiliar
-    retorno = JA_TEM_ESTRUTURA_AUXILIAR;
+    posicao = posicao - 1;
+
     // se posição é um valor válido {entre 1 e 10}
-    retorno = POSICAO_INVALIDA;
-    // o tamanho ser muito grande
-    retorno = SEM_ESPACO_DE_MEMORIA;
+    if((posicao < 0) || (posicao >= TAM)){
+        retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
+
+    // a posicao pode já existir estrutura auxiliar
+    if(vetor_principal[posicao] != NULL){
+        retorno = JA_TEM_ESTRUTURA_AUXILIAR;
+        return retorno;
+    }
+
     // o tamanho nao pode ser menor que 1
-    retorno = TAMANHO_INVALIDO;
+    if(posicao < 1){
+        retorno = TAMANHO_INVALIDO;
+        return retorno;
+    }
+
+    // o tamanho ser muito grande
+
+    // verificação do vetor principal
+    vetor_principal[posicao] = (VetPrincipal *)malloc(sizeof(VetPrincipal));
+    if(vetor_principal[posicao]->vetor == NULL){
+        retorno = SEM_ESPACO_DE_MEMORIA;
+
+        return retorno;
+    }
+
+    // verificação do vetor auxiliar
+    vetor_principal[posicao]->vetor = (int *)malloc(tamanho * sizeof(int));
+    if(vetor_principal[posicao]->vetor == NULL){
+        free(vetor_principal[posicao]);
+        vetor_principal[posicao] = NULL;
+
+        retorno = SEM_ESPACO_DE_MEMORIA;
+        return retorno;
+    }
+
     // deu tudo certo, crie
+    vetor_principal[posicao]->tamanhoVetAux = tamanho;
+    vetor_principal[posicao]->posicao = posicao;
+    vetor_principal[posicao]->posicaoVetAux = 0;
+
     retorno = SUCESSO;
 
     return retorno;
@@ -272,6 +308,8 @@ Objetivo: inicializa o programa. deve ser chamado ao inicio do programa
 
 void inicializar()
 {
+    for(int i = 0; i < TAM; i++)
+        vetor_principal[i] = NULL;
 }
 
 /*
@@ -282,4 +320,9 @@ para poder liberar todos os espaços de memória das estruturas auxiliares.
 
 void finalizar()
 {
+    for(int i = 0; i < TAM; i++){
+        if(vetor_principal[i] = NULL){
+            vetor_principal[i] = NULL;
+        }
+    }
 }
