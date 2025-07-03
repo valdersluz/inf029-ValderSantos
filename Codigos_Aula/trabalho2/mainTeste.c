@@ -19,8 +19,8 @@ int main()
 {
     inicializar();
     testeInserirSemNada();
-    //testeCriarEstrutura();
-    //testeInserirComEstrutura();
+    testeCriarEstrutura();
+    testeInserirComEstrutura();
     //testeExcluir();
     //testeExcluirNumeroEspecifico();
     //testeListar();

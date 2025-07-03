@@ -33,6 +33,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     // se posição é um valor válido {entre 1 e 10}
     if((posicao < 0) || (posicao >= TAM)){
         retorno = POSICAO_INVALIDA;
+
         return retorno;
     }
 
@@ -43,7 +44,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
     }
 
     // o tamanho nao pode ser menor que 1
-    if(posicao < 1){
+    if(tamanho < 1){
         retorno = TAMANHO_INVALIDO;
         return retorno;
     }
@@ -52,7 +53,7 @@ int criarEstruturaAuxiliar(int posicao, int tamanho)
 
     // verificação do vetor principal
     vetor_principal[posicao] = (VetPrincipal *)malloc(sizeof(VetPrincipal));
-    if(vetor_principal[posicao]->vetor == NULL){
+    if(vetor_principal[posicao] == NULL){
         retorno = SEM_ESPACO_DE_MEMORIA;
 
         return retorno;
@@ -94,26 +95,46 @@ int inserirNumeroEmEstrutura(int posicao, int valor)
     int temEspaco = 0;
     int posicao_invalida = 0;
 
-    if (posicao_invalida)
+    if((posicao <= 0) || (posicao > 10)){
+        posicao_invalida = 1;
+    }
+
+    posicao = posicao - 1;
+
+    if (posicao_invalida){
         retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
     else
     {
         // testar se existe a estrutura auxiliar
+        if(vetor_principal[posicao] != NULL){
+            existeEstruturaAuxiliar = 1;
+        }
         if (existeEstruturaAuxiliar)
         {
+            if(vetor_principal[posicao]->posicaoVetAux < vetor_principal[posicao]->tamanhoVetAux){
+                temEspaco = 1;
+            }
+
             if (temEspaco)
             {
                 //insere
+                vetor_principal[posicao]->vetor[vetor_principal[posicao]->posicaoVetAux] = valor;
+                vetor_principal[posicao]->posicaoVetAux++;
                 retorno = SUCESSO;
+                return retorno;
             }
             else
             {
                 retorno = SEM_ESPACO;
+                return retorno;
             }
         }
         else
         {
             retorno = SEM_ESTRUTURA_AUXILIAR;
+            return retorno;
         }
     }
 
