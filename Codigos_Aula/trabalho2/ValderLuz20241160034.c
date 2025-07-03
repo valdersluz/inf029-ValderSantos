@@ -154,7 +154,39 @@ Rertono (int)
 */
 int excluirNumeroDoFinaldaEstrutura(int posicao)
 {
-    int retorno = SUCESSO;
+    int retorno = 0;
+    int posicaoInvalida = 0;
+    int existeEstruturaAuxiliar = 0;
+
+    if((posicao <= 0) || (posicao > TAM)){
+        posicaoInvalida = 1;
+    }
+
+    posicao = posicao - 1;
+
+    if(posicaoInvalida){
+        retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
+
+    if(vetor_principal[posicao] != NULL){
+        existeEstruturaAuxiliar = 1;
+    }
+
+    if(!existeEstruturaAuxiliar){
+        retorno = SEM_ESTRUTURA_AUXILIAR;
+        return retorno;
+    }
+
+    if(vetor_principal[posicao]->posicaoVetAux == 0){
+        retorno = ESTRUTURA_AUXILIAR_VAZIA;
+        return retorno;
+    }
+
+    vetor_principal[posicao]->posicaoVetAux--;
+
+    retorno = SUCESSO;
+
     return retorno;
 }
 
@@ -173,7 +205,59 @@ Rertono (int)
 */
 int excluirNumeroEspecificoDeEstrutura(int posicao, int valor)
 {
-    int retorno = SUCESSO;
+    int retorno = 0;
+    int posicaoInvalida = 0;
+    int existeEstruturaAuxiliar = 0;
+
+    if((posicao <= 0) || (posicao > TAM)){
+        posicaoInvalida = 1;
+    }
+
+    posicao = posicao - 1;
+
+    if(posicaoInvalida){
+        retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
+
+    if(vetor_principal[posicao] != NULL){
+        existeEstruturaAuxiliar = 1;
+    }
+
+    if(!existeEstruturaAuxiliar){
+        retorno = SEM_ESTRUTURA_AUXILIAR;
+        return retorno;
+    }
+
+    if(vetor_principal[posicao]->posicaoVetAux == 0){
+        retorno = ESTRUTURA_AUXILIAR_VAZIA;
+        return retorno;
+    }
+
+    int *vetorAux = vetor_principal[posicao]->vetor;
+    int tamanho = vetor_principal[posicao]->posicaoVetAux;
+    int encontrado = 0;
+
+    for(int i = 0; i < tamanho; i++){
+        if(vetorAux[i] == valor){
+            encontrado = 1;
+
+            for(int j = i; j < tamanho - 1; j++){
+                vetorAux[j] = vetorAux[j + 1];
+            }
+
+            vetor_principal[posicao]->posicaoVetAux--;
+            break;
+        }
+    }
+
+    if(!encontrado){
+        retorno = NUMERO_INEXISTENTE;
+        return retorno;
+    }
+
+    retorno = SUCESSO;
+
     return retorno;
 }
 
@@ -205,6 +289,18 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
     int retorno = 0;
 
     return retorno;
+}
+
+void ordenarVetor(int vetor[], int tamanho){
+    for(int i = 0; i < tamanho; i++){
+        for(int j = i + 1; j < tamanho; j++){
+            if(vetor[i] > vetor[j]){
+                int temp = vetor[i];
+                vetor[i] = vetor[j];
+                vetor[j] = temp;
+            }
+        }
+    }
 }
 
 /*
