@@ -288,6 +288,24 @@ int getDadosEstruturaAuxiliar(int posicao, int vetorAux[])
 
     int retorno = 0;
 
+    if(posicao <= 0 || posicao > TAM){
+        retorno = POSICAO_INVALIDA;
+        return retorno;
+    }
+
+    posicao = posicao - 1;
+
+    if(vetor_principal[posicao] == NULL){
+        retorno = SEM_ESTRUTURA_AUXILIAR;
+        return retorno;
+    }
+
+    VetPrincipal *estrutura = vetor_principal[posicao];
+    for(int i = 0; i < estrutura->posicaoVetAux; i++){
+        vetorAux[i] = estrutura->vetor[i];
+    }
+
+    retorno = SUCESSO;
     return retorno;
 }
 
@@ -317,6 +335,12 @@ int getDadosOrdenadosEstruturaAuxiliar(int posicao, int vetorAux[])
 
     int retorno = 0;
 
+    retorno = getDadosEstruturaAuxiliar(posicao, vetorAux);
+
+    if(retorno == SUCESSO){
+        VetPrincipal *estrutura = vetor_principal[posicao - 1];
+        ordenarVetor(vetorAux, estrutura->posicaoVetAux);
+    }
 
     return retorno;
 }
@@ -333,6 +357,25 @@ int getDadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
 
     int retorno = 0;
+    int indice = 0;
+    int todasVazias = 1;
+
+    for(int i = 0; i < TAM; i++){
+        if(vetor_principal[i] != NULL && vetor_principal[i]->posicaoVetAux > 0){
+            todasVazias = 0;
+            for(int j = 0; j < vetor_principal[i]->posicaoVetAux; j++){
+                vetorAux[indice++] = vetor_principal[i]->vetor[j];
+            }
+        }
+    }
+
+    if(todasVazias){
+        retorno = TODAS_ESTRUTURAS_AUXILIARES_VAZIAS;
+        return retorno;
+    } else {
+        retorno = SUCESSO;
+        return retorno;
+    }
     return retorno;
 }
 
@@ -348,6 +391,19 @@ int getDadosOrdenadosDeTodasEstruturasAuxiliares(int vetorAux[])
 {
 
     int retorno = 0;
+
+    retorno = getDadosDeTodasEstruturasAuxiliares(vetorAux);
+
+    if(retorno == SUCESSO){
+        int totalElementos = 0;
+        for(int i = 0; i < TAM; i++){
+            if(vetor_principal[i] != NULL){
+                totalElementos += vetor_principal[i]->posicaoVetAux;
+            }
+        }
+        ordenarVetor(vetorAux, totalElementos);
+    }
+
     return retorno;
 }
 
