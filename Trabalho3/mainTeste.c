@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ValderLuz20241160034.h"
+#include "EstruturaVetores.h"
 
 void show_log(char *str);
 
@@ -20,7 +20,7 @@ void testarArquivoSegundaVez();
 int main()
 {
     inicializar();
-    testarArquivoPrimeiraVez();
+    //testarArquivoPrimeiraVez();
     //testarArquivoSegundaVez();
     /*testeInserirSemNada();
     testeCriarEstrutura();
@@ -33,13 +33,12 @@ int main()
     testeListaEncadeada();*/
     finalizar();
 }
-int ligado = 1;
+int ligado = 0;
 void show_log(char *str)
 {
     if (ligado)
         printf("###%s###\n", str);
 }
-
 int posicoes[] = {2, 5, 7};
 int tamanhos[] = {8, 4, 6};
 int valores[] = {1, 40, 60, -6, -7, 5, 9, 32};
@@ -113,7 +112,6 @@ void testeInserirComEstrutura()
     printf("%d\n", inserirNumeroEmEstrutura(2, 4) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, -2) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, 6) == SUCESSO);
-
     printf("%d\n", inserirNumeroEmEstrutura(2, 5) == SEM_ESPACO);
 }
 /*

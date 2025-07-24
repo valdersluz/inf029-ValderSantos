@@ -1,4 +1,3 @@
-
 #ifndef TRABALHO2_ESTRUTURAVETORES_H
 #define TRABALHO2_ESTRUTURAVETORES_H
 
@@ -28,6 +27,8 @@ int getQuantidadeElementosEstruturaAuxiliar(int posicao);
 No *montarListaEncadeadaComCabecote();
 void getDadosListaEncadeadaComCabecote(No *inicio, int vetorAux[]);
 void destruirListaEncadeadaComCabecote(No **inicio);
+void testarArquivoPrimeiraVez();
+void testarArquivoSegundaVez();
 
 void inicializar();
 void finalizar();
